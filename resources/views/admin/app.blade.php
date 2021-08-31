@@ -68,27 +68,19 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-calendar-day"></i></div>
                             Event
                         </a>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/tools">
                             <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
                             Alat Event
                         </a>
-                        <div class="sb-sidenav-menu-heading">Tiket Event</div>
-                        <a class="nav-link" href="#">
+                        <div class="sb-sidenav-menu-heading">Tiket</div>
+                        <a class="nav-link" href="/tickets">
                             <div class="sb-nav-link-icon"><i class="fas fa-ticket-alt"></i></div>
-                            Pesanan
-                        </a>
-                        <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon"><i class="fas fa-receipt"></i></div>
-                            Pembayaran
+                            Pembelian Tiket
                         </a>
                         <div class="sb-sidenav-menu-heading">Alat Event</div>
-                        <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon"><i class="fas fa-truck-loading"></i></div>
-                            Pesanan
-                        </a>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/rentals">
                             <div class="sb-nav-link-icon"><i class="fas fa-receipt"></i></div>
-                            Pembayaran
+                            Penyewaan Alat
                         </a>
                     </div>
                 </div>

@@ -19,3 +19,18 @@ Route::get('/', function () {
 Route::get('/events', function () {
     return view('admin.events.index');
 });
+Route::get('/events/add', function () {
+    return view('admin.events.add');
+});
+Route::get('/tools', function () {
+    return view('admin.tools.index');
+});
+Route::get('/tickets', function () {
+    return view('admin.tickets.index');
+});
+Route::get('/tickets/buyer', function () {
+    return view('admin.tickets.buyer');
+});
+Route::get('/rentals', function () {
+    return view('admin.rentals.index');
+});

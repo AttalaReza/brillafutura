@@ -1,6 +1,6 @@
 @extends('admin.app')
 
-@section('title', 'Event - Admin')
+@section('title', 'Tambah Event - Admin')
 
 @section('user')
 {{"Reza"}}
@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group">
                         <label class="mb-1" for="description">Deskripsi Event</label>
-                        <textarea class="form-control" id="description" name="description" type="text" rows=3 placeholder="Masukkan deskripsi event" required></textarea>
+                        <textarea class="form-control" id="description" name="description" type="text" rows=5 placeholder="Masukkan deskripsi event" required></textarea>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
@@ -167,91 +167,6 @@
             </div>
         </div>
 
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4><i class="fas fa-table mr-1"></i>Data Event
-                    <div class="float-right">
-                        <a class="btn btn-primary" href="/events/add">Tambah Event</a>
-                    </div>
-                </h4>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Sponsor</th>
-                                <th>Event</th>
-                                <th>Deskripsi</th>
-                                <th>Harga Tiket</th>
-                                <th>Lokasi</th>
-                                <th>Tanggal Event</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Sponsor</th>
-                                <th>Event</th>
-                                <th>Deskripsi</th>
-                                <th>Harga Tiket</th>
-                                <th>Lokasi</th>
-                                <th>Tanggal Event</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <tr>
-                                <td>Angkasa</td>
-                                <td>
-                                    Konser 123 <br />
-                                    <img class="mt-2" src="{{ asset('logo.png') }}" alt="logo" width="120" />
-                                </td>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-                                <td width="180">
-                                    <b>Presale 1</b>: 80.000 <br />
-                                    <b>Presale 2</b>: 100.000 <br />
-                                    <b>Onsale</b>: 120.000 <br />
-                                </td>
-                                <td>Garden Palace</td>
-                                <td>1 - 2 Sept 2021</td>
-                                <td class="text-center">
-                                    <form action="#" method="POST">
-                                        <a title="Edit" class="btn btn-warning btn-sm m-1" href="#">edit</a>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button title="Delete" type="submit" class="btn btn-danger btn-sm m-1" onclick="return confirm('Apakah Anda yakin ingin menghapus event ini?')">delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>BEM FILKOM UB</td>
-                                <td>
-                                    Konser 456 <br />
-                                    <img class="mt-2" src="{{ asset('logo.png') }}" alt="logo" width="120" />
-                                </td>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-                                <td width="180">
-                                    <b>Presale 1</b>: 100.000 <br />
-                                    <b>Presale 2</b>: 130.000 <br />
-                                    <b>Onsale</b>: 150.000 <br />
-                                </td>
-                                <td>Samantha Krida</td>
-                                <td>31 Agust 2021</td>
-                                <td class="text-center">
-                                    <form action="#" method="POST">
-                                        <a title="Edit" class="btn btn-warning btn-sm m-1" href="#">edit</a>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button title="Delete" type="submit" class="btn btn-danger btn-sm m-1" onclick="return confirm('Apakah Anda yakin ingin menghapus event ini?')">delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
     </div>
 </main>
 
