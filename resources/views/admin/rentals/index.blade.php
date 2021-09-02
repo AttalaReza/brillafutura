@@ -38,7 +38,7 @@
                                 <th>Tanggal Sewa</th>
                                 <th>Durasi</th>
                                 <th>Lokasi</th>
-                                <th>Status</th>
+                                <th>Biaya</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -49,7 +49,7 @@
                                 <th>Tanggal Sewa</th>
                                 <th>Durasi</th>
                                 <th>Lokasi</th>
-                                <th>Status</th>
+                                <th>Biaya</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>
@@ -60,12 +60,12 @@
                                 <td>10 Sept 2021</td>
                                 <td>1 hari</td>
                                 <td>FILKOM UB</td>
-                                <td>DP 50%</td>
+                                <td>7,000,000</td>
                                 <td class="text-center">
                                     <form action="#" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button title="" type="submit" class="btn btn-warning btn-sm m-1" onclick="return confirm('Apakah Anda yakin ingin mengubah status penyewaan menjadi LUNAS?')">Lunas</button>
+                                        <button title="Terlunasi" type="submit" class="btn btn-warning btn-sm m-1" onclick="return confirm('Apakah Anda yakin ingin mengubah status penyewaan menjadi LUNAS?')">DP 50%</button>
                                     </form>
                                 </td>
                             </tr>
@@ -75,13 +75,9 @@
                                 <td>20-22 Sept 2021</td>
                                 <td>3 hari</td>
                                 <td>Garden Palma</td>
-                                <td>Lunas</td>
+                                <td>21,000,000</td>
                                 <td class="text-center">
-                                    <form action="#" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <!-- <button title="Delete" type="submit" class="btn btn-success btn-sm m-1" onclick="return confirm('Apakah Anda yakin ingin mengubah status penyewaan menjadi LUNAS?')">Membayar</button> -->
-                                    </form>
+                                    <a class="btn btn-info btn-sm">Lunas</a>
                                 </td>
                             </tr>
 
