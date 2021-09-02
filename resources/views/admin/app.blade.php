@@ -19,7 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
 
     <!-- Template Main CSS File -->
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+    <link href="{{ asset('dashboard/css/styles.css') }}" rel="stylesheet" />
 </head>
 
 <body class="sb-nav-fixed">
@@ -43,9 +43,9 @@
                     <a class="dropdown-item" href="#">Home</a>
                     <!-- <a class="dropdown-item" href="#">Activity Log</a> -->
                     <div class="dropdown-divider"></div>
-                    <form action="#" method="POST">
+                    <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <a class="dropdown-item" href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
                             Logout
                         </a>
                     </form>
@@ -117,12 +117,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('assets/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('assets/demo/chart-bar-demo.js') }}"></script>
-    <script src="{{ asset('assets/demo/datatables-demo.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/demo/chart-bar-demo.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/demo/datatables-demo.js') }}"></script>
 
     <!-- Template Main JS File -->
-    <script src="{{ asset('js/scripts.js') }}"></script>
+    <script src="{{ asset('dashboard/js/scripts.js') }}"></script>
 </body>
 
 </html>
