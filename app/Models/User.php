@@ -18,6 +18,8 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,6 +29,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'address',
+        'role'
     ];
 
     /**
@@ -58,4 +63,17 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function purchase()
+    {
+        return $this->hasMany('App\Models\Purchase');
+    }
+    public function rental()
+    {
+        return $this->hasMany('App\Models\Rental');
+    }
+    public function payment()
+    {
+        return $this->hasMany('App\Models\Payment');
+    }
 }

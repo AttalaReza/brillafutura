@@ -72,17 +72,17 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input class="form-control" id="presale-l-price" name="presale-l-price" type="number" min=1000 step=1000 placeholder="Masukkan harga tiket Presale 1" />
+                                    <input class="form-control" id="presale-l" name="presale-l" type="number" min=1000 step=1000 placeholder="Masukkan harga tiket Presale 1" />
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input class="form-control" id="presale-1-start-date" name="presale-l-start-date" type="date" />
+                                    <input class="form-control" id="presale-1-start" name="presale-l-start" type="date" />
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input class="form-control" id="presale-1-end-date" name="presale-l-end-date" type="date" />
+                                    <input class="form-control" id="presale-1-end" name="presale-l-end" type="date" />
                                 </div>
                             </div>
                         </div>
@@ -97,17 +97,17 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input class="form-control" id="presale-2-price" name="presale-2-price" type="number" min=1000 step=1000 placeholder="Masukkan harga tiket Presale 2" />
+                                    <input class="form-control" id="presale-2" name="presale-2" type="number" min=1000 step=1000 placeholder="Masukkan harga tiket Presale 2" />
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input class="form-control" id="presale-2-start-date" name="presale-2-start-date" type="date" />
+                                    <input class="form-control" id="presale-2-start" name="presale-2-start" type="date" />
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input class="form-control" id="presale-2-end-date" name="presale-2-end-date" type="date" />
+                                    <input class="form-control" id="presale-2-end" name="presale-2-end" type="date" />
                                 </div>
                             </div>
                         </div>
@@ -122,17 +122,17 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input class="form-control number-separator" id="onsale-price" name="onsale-price" type="number" min=1000 step=1000 placeholder="Masukkan harga tiket Onsale" />
+                                    <input class="form-control" id="onsale" name="onsale" type="number" min=1000 step=1000 placeholder="Masukkan harga tiket Onsale" />
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input class="form-control" id="onsale-start-date" name="onsale-start-date" type="date" />
+                                    <input class="form-control" id="onsale-start" name="onsale-start" type="date" />
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input class="form-control" id="onsale-end--date" name="onsale-end-date" type="date" />
+                                    <input class="form-control" id="onsale-end" name="onsale-end" type="date" />
                                 </div>
                             </div>
                         </div>

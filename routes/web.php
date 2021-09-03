@@ -36,8 +36,8 @@ Route::group(['middleware' => 'auth:sanctum', 'verified'], function () {
     Route::get('/tickets', function () {
         return view('admin.tickets.index');
     });
-    Route::get('/tickets/buyer', function () {
-        return view('admin.tickets.buyer');
+    Route::get('/tickets/purchasers', function () {
+        return view('admin.tickets.purchasers');
     });
     Route::get('/rentals', function () {
         return view('admin.rentals.index');

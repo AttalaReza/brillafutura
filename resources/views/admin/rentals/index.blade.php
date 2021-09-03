@@ -65,7 +65,7 @@
                                     <form action="#" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button title="Terlunasi" type="submit" class="btn btn-warning btn-sm m-1" onclick="return confirm('Apakah Anda yakin ingin mengubah status penyewaan menjadi LUNAS?')">DP 50%</button>
+                                        <button title="Ubah ke Lunas" type="submit" class="btn btn-warning btn-sm m-1" onclick="return confirm('Apakah Anda yakin ingin mengubah status penyewaan menjadi LUNAS?')">DP 50%</button>
                                     </form>
                                 </td>
                             </tr>
@@ -77,7 +77,7 @@
                                 <td>Garden Palma</td>
                                 <td>21,000,000</td>
                                 <td class="text-center">
-                                    <a class="btn btn-info btn-sm">Lunas</a>
+                                    <a class="btn btn-info btn-sm" title="Telah Lunas">Lunas</a>
                                 </td>
                             </tr>
 

@@ -56,7 +56,7 @@
                                 <td>Garden Palace</td>
                                 <td>1 - 2 Sept 2021</td>
                                 <td class="text-center">
-                                    <a title="Daftar Pembeli" class="btn btn-info btn-sm m-1" href="/tickets/buyer">Pembeli</a>
+                                    <a title="Daftar Pembeli" class="btn btn-info btn-sm m-1" href="/tickets/purchasers">Pembeli</a>
                                 </td>
                             </tr>
                             <tr>
@@ -65,7 +65,7 @@
                                 <td>Samantha Krida</td>
                                 <td>31 Agust 2021</td>
                                 <td class="text-center">
-                                    <a title="Daftar Pembeli" class="btn btn-info btn-sm m-1" href="/tickets/buyer">Pembeli</a>
+                                    <a title="Daftar Pembeli" class="btn btn-info btn-sm m-1" href="/tickets/purchasers">Pembeli</a>
                                 </td>
                             </tr>
                         </tbody>
