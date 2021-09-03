@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,15 +23,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['middleware' => 'auth:sanctum', 'verified'], function () {
-    Route::get('/', function () {
-        return view('admin.index');
-    });
-    Route::get('/events', function () {
-        return view('admin.events.index');
-    });
-    Route::get('/events/add', function () {
-        return view('admin.events.add');
-    });
+    Route::get('/events/add', [EventController::class, 'add'])->name('events.add');
+    Route::resource('events', EventController::class);
+
     Route::get('/tools', function () {
         return view('admin.tools.index');
     });
