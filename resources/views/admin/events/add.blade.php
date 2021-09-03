@@ -36,7 +36,7 @@
                 </h4>
             </div>
             <div class="card-body">
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="name">Nama Event</label>
@@ -61,7 +61,7 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input class="form-control" id="presale_1" name="presale_1" type="number" min=1000 step=1000 placeholder="Masukkan harga tiket" />
+                                    <input class="form-control" id="presale_1" name="presale_1" type="number" min=0 step=1000 placeholder="Masukkan harga tiket" />
                                 </div>
                             </div>
                             <div class="col-4">
@@ -82,7 +82,7 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input class="form-control" id="presale_2" name="presale_2" type="number" min=1000 step=1000 placeholder="Masukkan harga tiket" />
+                                    <input class="form-control" id="presale_2" name="presale_2" type="number" min=0 step=1000 placeholder="Masukkan harga tiket" />
                                 </div>
                             </div>
                             <div class="col-4">
@@ -103,16 +103,16 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input class="form-control" id="onsale" name="onsale" type="number" min=1000 step=1000 placeholder="Masukkan harga tiket" />
+                                    <input class="form-control" id="onsale" name="onsale" type="number" min=0 step=1000 placeholder="Masukkan harga tiket" />
                                 </div>
                             </div>
                             <div class="col-4">
                                 <label for="onsale">Penjualan Dimulai</label>
-                                <input class="form-control" id="onsale" name="onsale" type="date" />
+                                <input class="form-control" id="onsale_start" name="onsale_start" type="date" />
                             </div>
                             <div class="col-4">
                                 <label for="onsale">Penjualan Berakhir</label>
-                                <input class="form-control" id="onsale" name="onsale" type="date" />
+                                <input class="form-control" id="onsale_end" name="onsale_end" type="date" />
                             </div>
                         </div>
                     </div>

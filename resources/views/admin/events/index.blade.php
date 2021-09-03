@@ -66,21 +66,18 @@
                                     <img class="mt-2" src="{{ asset('/storage/images/'.$event->file_image) }}" alt="{{ $event->file_image }}" width="120" />
                                 </td>
                                 <td>{{ $event->description }}</td>
-                                <td width="180">
+                                <td width="150">
                                     <b>Presale 1</b>: {{ $event->presale_1 }} <br />
                                     <b>Presale 2</b>: {{ $event->presale_2 }} <br />
                                     <b>Onsale</b>: {{ $event->onsale }} <br />
                                 </td>
                                 <td>{{ $event->location }}</td>
-                                @php
-                                if ($event->end_date == null) {
-                                $date = date("d M Y", strtotime($event->start_date));
-                                } elseif ($event->end_date != null) {
-                                $date1 = date("d", strtotime($event->start_date));
-                                $date2 = date("d M Y", strtotime($event->end_date));
-                                $date = $date1 . " - " . $date2;
-                                }
-                                @endphp
+                                @isset ($event->end_date)
+                                @php ($date = date("d", strtotime($event->start_date)) . " - " . date("d M Y", strtotime($event->end_date)))
+                                @endisset
+                                @empty ($event->end_date)
+                                @php ($date = date("d M Y", strtotime($event->start_date)))
+                                @endempty
                                 <td>{{ $date }}</td>
                                 <td class="text-center">
                                     <form action="{{ route('events.destroy', $event->id) }}" method="POST">

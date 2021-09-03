@@ -46,146 +46,90 @@
                     <!-- presale 1 -->
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-3">
+                            <div class="col-4">
                                 <label for="presale_1">Tiket Presale 1</label>
                                 <div class="input-group">
                                     <div class="input-group-append">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input value="{{ $data['event']->presale_1 }}" class="form-control" id="presale_1" name="presale_1" type="number" min=1000 step=1000 placeholder="Masukkan harga tiket" />
+                                    <input value="{{ $data['event']->presale_1 }}" class="form-control" id="presale_1" name="presale_1" type="number" min=0 step=1000 placeholder="Masukkan harga tiket" />
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <label></label>
-                                <div class="form-control mt-2">Tanggal Lama</div>
-                                <div class="form-control mt-1">Tanggal Update</div>
-                            </div>
-                            <div class="col-3">
+                            <div class="col-4">
                                 <label for="presale_1_start">Penjualan Dimulai</label>
-                                @php ($date = "-")
-                                @isset($data['event']->presale_1_start)
-                                @php ($date = date("d-M-Y", strtotime( $data['event']->presale_1_start)))
-                                @endisset
-                                <div class="form-control">{{ $date }}</div>
-                                <input class="form-control mt-1" id="presale_1_start" name="presale_1_start" type="date" />
+                                <input value="{{ $data['event']->presale_1_start }}" class="form-control" id="presale_1_start" name="presale_1_start" type="date" />
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                                 <label for="presale_1_end">Penjualan Berakhir</label>
-                                @php ($date = "-")
-                                @isset($data['event']->presale_1_end)
-                                @php ($date = date("d-M-Y", strtotime( $data['event']->presale_1_end)))
-                                @endisset
-                                <div class="form-control">{{ $date }}</div>
-                                <input class="form-control mt-1" id="presale_1_end" name="presale_1_end" type="date" />
+                                <input value="{{ $data['event']->presale_1_end }}" class="form-control" id="presale_1_end" name="presale_1_end" type="date" />
                             </div>
                         </div>
                     </div>
                     <!-- presale 2 -->
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-3">
+                            <div class="col-4">
                                 <label for="presale_2">Tiket Presale 2</label>
                                 <div class="input-group">
                                     <div class="input-group-append">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input value="{{ $data['event']->presale_2 }}" class="form-control" id="presale_2" name="presale_2" type="number" min=1000 step=1000 placeholder="Masukkan harga tiket" />
+                                    <input value="{{ $data['event']->presale_2 }}" class="form-control" id="presale_2" name="presale_2" type="number" min=0 step=1000 placeholder="Masukkan harga tiket" />
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <label></label>
-                                <div class="form-control mt-2">Tanggal Lama</div>
-                                <div class="form-control mt-1">Tanggal Update</div>
-                            </div>
-                            <div class="col-3">
+
+                            <div class="col-4">
                                 <label for="presale_2_start">Penjualan Dimulai</label>
-                                @php ($date = "-")
-                                @isset($data['event']->presale_2_start)
-                                @php ($date = date("d-M-Y", strtotime( $data['event']->presale_2_start)))
-                                @endisset
-                                <div class="form-control">{{ $date }}</div>
-                                <input class="form-control mt-1" id="presale_2_start" name="presale_2_start" type="date" />
+                                <input value="{{ $data['event']->presale_2_start }}" class="form-control" id="presale_2_start" name="presale_2_start" type="date" />
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                                 <label for="presale_2_end">Penjualan Berakhir</label>
-                                @php ($date = "-")
-                                @isset($data['event']->presale_2_end)
-                                @php ($date = date("d-M-Y", strtotime( $data['event']->presale_2_end)))
-                                @endisset
-                                <div class="form-control">{{ $date }}</div>
-                                <input class="form-control mt-1" id="presale_2_end" name="presale_2_end" type="date" />
+                                <input value="{{ $data['event']->presale_2_end }}" class="form-control" id="presale_2_end" name="presale_2_end" type="date" />
                             </div>
                         </div>
                     </div>
                     <!-- onsale -->
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-3">
+                            <div class="col-4">
                                 <label for="onsale">Tiket Onsale</label>
                                 <div class="input-group">
                                     <div class="input-group-append">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input value="{{ $data['event']->onsale }}" class="form-control" id="onsale" name="onsale" type="number" min=1000 step=1000 placeholder="Masukkan harga tiket" />
+                                    <input value="{{ $data['event']->onsale }}" class="form-control" id="onsale" name="onsale" type="number" min=0 step=1000 placeholder="Masukkan harga tiket" />
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <label></label>
-                                <div class="form-control mt-2">Tanggal Lama</div>
-                                <div class="form-control mt-1">Tanggal Update</div>
-                            </div>
-                            <div class="col-3">
+                            <div class="col-4">
                                 <label for="onsale_start">Penjualan Dimulai</label>
-                                @php ($date = "-")
-                                @isset($data['event']->onsale_start)
-                                @php ($date = date("d-M-Y", strtotime( $data['event']->onsale_start)))
-                                @endisset
-                                <div class="form-control">{{ $date }}</div>
-                                <input class="form-control mt-1" id="onsale_start" name="onsale_start" type="date" />
+                                <input value="{{ $data['event']->onsale_start }}" class="form-control" id="onsale_start" name="onsale_start" type="date" />
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                                 <label for="onsale_end">Penjualan Berakhir</label>
-                                @php ($date = "-")
-                                @isset($data['event']->onsale_end)
-                                @php ($date = date("d-M-Y", strtotime( $data['event']->onsale_end)))
-                                @endisset
-                                <div class="form-control">{{ $date }}</div>
-                                <input class="form-control mt-1" id="onsale_end" name="onsale_end" type="date" />
+                                <input value="{{ $data['event']->onsale_end }}" class="form-control" id="onsale_end" name="onsale_end" type="date" />
                             </div>
                         </div>
                     </div>
-                    <label>Nb: Kosongkan Tanggal Update jika tanggal penjualan tidak ingin diubah</label>
+                    <label>Nb: Kosongkan harga dan tanggal jika kategori tiket tidak tersedia</label>
                     <hr />
                     <label><b>Informasi Event</b></label>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-3">
+                            <div class="col-4">
                                 <label for="location">Lokasi Event</label>
                                 <input class="form-control" id="location" name="location" type="text" value="{{ $data['event']->location }}" placeholder="Masukkan lokasi event" required />
                             </div>
-                            <div class="col-3">
-                                <label></label>
-                                <div class="form-control mt-2">Tanggal Lama</div>
-                                <div class="form-control mt-1">Tanggal Update</div>
+                            <div class="col-4">
+                                <label for="start-date">Tanggal Dimulai</label>
+                                <input value="{{ $data['event']->start_date }}" class="form-control" id="start_date" name="start_date" type="date" />
                             </div>
-                            <div class="col-3">
-                                <label for="start-date">Tanggal Event Dimulai</label>
-                                @php ($date = date("d-M-Y", strtotime( $data['event']->start_date)))
-                                <div class="form-control">{{ $date }}</div>
-                                <input class="form-control mt-1" id="start-date" name="start-date" type="date" />
-                            </div>
-                            <div class="col-3">
-                                <label for="end-date">Tanggal Event Berakhir</label>
-                                @php ($date = "-")
-                                @isset($data['event']->end_date)
-                                @php ($date = date("d-M-Y", strtotime( $data['event']->end_date)))
-                                @endisset
-                                <div class="form-control">{{ $date }}</div>
-                                <input class="form-control mt-1" id="end-date" name="end-date" type="date" />
+                            <div class="col-4">
+                                <label for="end-date">Tanggal Berakhir</label>
+                                <input value="{{ $data['event']->end_date }}" class="form-control" id="end_date" name="end_date" type="date" />
                             </div>
                         </div>
                     </div>
-                    <label>Nb: Kosongkan Tanggal Update jika tanggal event tidak ingin diubah</label>
+                    <label>Nb: Kosongkan Tanggal Berakhir jika Event hanya berlangsung 1 hari / gunakan tanggal yang sama</label>
                     <hr />
                     <div class="form-group">
                         <div class="form-row">
