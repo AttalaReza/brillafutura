@@ -15,11 +15,11 @@ class EventController extends Controller
     public function index(Auth $auth)
     {
         $user = $auth::user();
-        if ($user->role == 0) {
-            return redirect()->route('home');
-        }
+        // if ($user->role == 0) {
+        //     return redirect()->route('home');
+        // }
         $data = [
-            'events' => Event::orderBy('name', 'ASC')->get(),
+            'events' => Event::orderBy('created_at', 'ASC')->get(),
             'user' => $user
         ];
         return view('admin.events.index', compact('data'));
@@ -81,7 +81,7 @@ class EventController extends Controller
         date_default_timezone_set('Asia/Jakarta');
         $name = $request->input('name');
         if ($request->file()) {
-            Storage::disk('local')->delete('public/images/' . $event->file_image);
+            Storage::disk('local')->delete('public/images/events/' . $event->file_image);
             $file_name = $this->uploadFileImage($request);
         } else {
             $file_name = $event->file_image;
@@ -100,7 +100,7 @@ class EventController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $event->delete();
-        Storage::disk('local')->delete('public/images/' . $event->file_path);
+        Storage::disk('local')->delete('public/images/events/' . $event->file_image);
         return redirect()
             ->route('events.index')
             ->with('success', $event->name . ' event were successfully removed');
@@ -117,7 +117,7 @@ class EventController extends Controller
         $file_name = time() . '-' . Str::slug($name, '-') . '.' . $extension;
         if ($extension == "png" || $extension == "jpg" || $extension == "jpeg") {
             if ($size <= 2048000) {
-                $file->storeAs('images', $file_name, 'public');
+                $file->storeAs('images/events', $file_name, 'public');
             } else {
                 return redirect()
                     ->route('events.index')

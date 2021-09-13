@@ -3,7 +3,7 @@
 @section('title', 'Pembelian Tiket - Admin')
 
 @section('user')
-{{"Reza"}}
+{{ $data['user']->name }}
 @endsection
 
 @section('content')
@@ -33,7 +33,6 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Sponsor</th>
                                 <th>Event</th>
                                 <th>Lokasi</th>
                                 <th>Tanggal Event</th>
@@ -42,7 +41,6 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Sponsor</th>
                                 <th>Event</th>
                                 <th>Lokasi</th>
                                 <th>Tanggal Event</th>
@@ -50,24 +48,26 @@
                             </tr>
                         </tfoot>
                         <tbody>
+                            @foreach ($data['events'] as $event)
                             <tr>
-                                <td>Angkasa</td>
-                                <td>Konser 123</td>
-                                <td>Garden Palace</td>
-                                <td>1 - 2 Sept 2021</td>
+                                <td>{{ $event->name }}</td>
+                                <td>{{ $event->location }}</td>
+                                @isset ($event->end_date)
+                                @if ($event->start_date == $event->end_date)
+                                @php ($date = date("j M Y", strtotime($event->start_date)))
+                                @else
+                                @php ($date = date("j", strtotime($event->start_date)) . "-" . date("j M Y", strtotime($event->end_date)))
+                                @endif
+                                @endisset
+                                @empty ($event->end_date)
+                                @php ($date = date("j M Y", strtotime($event->start_date)))
+                                @endempty
+                                <td>{{ $date }}</td>
                                 <td class="text-center">
-                                    <a title="Daftar Pembeli" class="btn btn-info btn-sm m-1" href="/tickets/purchasers">Pembeli</a>
+                                    <a title="Daftar Pembeli" class="btn btn-info btn-sm m-1" href="{{ route('tickets.purchasers', $event->id) }}">Pembeli</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>BEM FILKOM UB</td>
-                                <td>Konser 456</td>
-                                <td>Samantha Krida</td>
-                                <td>31 Agust 2021</td>
-                                <td class="text-center">
-                                    <a title="Daftar Pembeli" class="btn btn-info btn-sm m-1" href="/tickets/purchasers">Pembeli</a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

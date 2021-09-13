@@ -37,7 +37,6 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Sponsor</th>
                                 <th>Event</th>
                                 <th>Deskripsi</th>
                                 <th>Tiket</th>
@@ -48,7 +47,6 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Sponsor</th>
                                 <th>Event</th>
                                 <th>Deskripsi</th>
                                 <th>Tiket</th>
@@ -60,23 +58,29 @@
                         <tbody>
                             @foreach ($data['events'] as $event)
                             <tr>
-                                <td>{{ $event->sponsor }}</td>
                                 <td>
                                     {{ $event->name }}<br />
-                                    <img class="mt-2" src="{{ asset('/storage/images/'.$event->file_image) }}" alt="{{ $event->file_image }}" width="120" />
+                                    <img class="mt-2" src="{{ asset('/storage/images/events/'.$event->file_image) }}" alt="{{ $event->file_image }}" width="120" />
                                 </td>
                                 <td>{{ $event->description }}</td>
                                 <td width="150">
-                                    <b>Presale 1</b>: {{ $event->presale_1 }} <br />
-                                    <b>Presale 2</b>: {{ $event->presale_2 }} <br />
-                                    <b>Onsale</b>: {{ $event->onsale }} <br />
+                                    @php ($p1 = number_format($event->presale_1))
+                                    <b>Presale 1</b>: {{ $p1 }} <br />
+                                    @php ($p2 = number_format($event->presale_2))
+                                    <b>Presale 2</b>: {{ $p2 }} <br />
+                                    @php ($os = number_format($event->onsale))
+                                    <b>Onsale</b>: {{ $os }} <br />
                                 </td>
                                 <td>{{ $event->location }}</td>
                                 @isset ($event->end_date)
-                                @php ($date = date("d", strtotime($event->start_date)) . " - " . date("d M Y", strtotime($event->end_date)))
+                                @if ($event->start_date == $event->end_date)
+                                @php ($date = date("j M Y", strtotime($event->start_date)))
+                                @else
+                                @php ($date = date("j", strtotime($event->start_date)) . "-" . date("j M Y", strtotime($event->end_date)))
+                                @endif
                                 @endisset
                                 @empty ($event->end_date)
-                                @php ($date = date("d M Y", strtotime($event->start_date)))
+                                @php ($date = date("j M Y", strtotime($event->start_date)))
                                 @endempty
                                 <td>{{ $date }}</td>
                                 <td class="text-center">
@@ -84,7 +88,7 @@
                                         <a title="Edit" class="btn btn-warning btn-sm m-1" href="{{ route('events.edit', $event->id) }}">edit</a>
                                         @csrf
                                         @method('DELETE')
-                                        <button title="Delete" type="submit" class="btn btn-danger btn-sm m-1" onclick="return confirm('Apakah Anda yakin ingin menghapus event ini?')">delete</button>
+                                        <button title="Delete" type="submit" class="btn btn-danger btn-sm m-1" onclick="return confirm('Apakah Anda yakin ingin menghapus event {{ $event->name }} ?')">delete</button>
                                     </form>
                                 </td>
                             </tr>

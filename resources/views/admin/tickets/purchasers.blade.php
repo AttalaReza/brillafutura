@@ -3,7 +3,7 @@
 @section('title', 'Pembeli Tiket - Admin')
 
 @section('user')
-{{"Reza"}}
+{{ $data['user']->name }}
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
     <div class="container-fluid">
         <h1 class="mt-4">Dashboard</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Pembeli Tiket Konser 123</li>
+            <li class="breadcrumb-item active">Pembeli Tiket {{ $data['event']->name }}</li>
         </ol>
         @if (session('success'))
         <div class="alert alert-success">
@@ -26,14 +26,18 @@
         @endif
         <div class="card mb-4">
             <div class="card-header">
-                <h4><i class="fas fa-table mr-1"></i>Data Pembeli Tiket</h4>
+                <h4><i class="fas fa-table mr-1"></i>Data Pembeli Tiket {{ $data['event']->name }}
+                    <div class="float-right">
+                        <a class="btn btn-secondary btn-sm" href="{{ route('tickets.index') }}">Back</a>
+                    </div>
+                </h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Waktu</th>
+                                <th>Waktu Beli</th>
                                 <th>Pembeli</th>
                                 <th>Kategori</th>
                                 <th>Harga Tiket</th>
@@ -44,7 +48,7 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Waktu</th>
+                                <th>Waktu Beli</th>
                                 <th>Pembeli</th>
                                 <th>Kategori</th>
                                 <th>Harga Tiket</th>
@@ -54,28 +58,23 @@
                             </tr>
                         </tfoot>
                         <tbody>
+                            @foreach ($data['payments'] as $payment)
                             <tr>
-                                <td>10:00</br>29 Agustus 2021</td>
-                                <td>Rafif</td>
-                                <td>Presale 1</td>
-                                <td>100,000</td>
-                                <td>3 Tiket</td>
-                                <td><b>300,000</b></td>
+                                @php ($time = date("G:i", strtotime($payment->created_at)))
+                                @php ($date = date("d M Y", strtotime($payment->created_at)))
+                                <td>{{ $time }}</br>{{ $date }}</td>
+                                <td>{{ $payment->user->name }}</td>
+                                <td>{{ $payment->purchase->ticket }}</td>
+                                @php ($tp = number_format($payment->purchase->ticket_price))
+                                <td>{{ $tp }}</td>
+                                <td>{{ $payment->purchase->amount }} tiket</td>
+                                @php ($pa = number_format($payment->purchase->payment_amount))
+                                <td><b>{{ $pa }}</b></td>
                                 <td class="text-center">
-                                    <a class="btn btn-success btn-sm">RF450GP300</a>
+                                    <a class="btn btn-success btn-sm">{{ $payment->purchase->code }}</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>12:00</br>3 Sept 2021</td>
-                                <td>Khairi</td>
-                                <td>Presale 2</td>
-                                <td>120,000</td>
-                                <td>1 Tiket</td>
-                                <td><b>120,000</b></td>
-                                <td class="text-center">
-                                    <a class="btn btn-success btn-sm m-1">KH120GP400</a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -3,7 +3,7 @@
 @section('title', 'Dashboard Brilla Futura')
 
 @section('user')
-{{ "Reza" }}
+{{ $data['user']->name }}
 @endsection
 
 @section('content')

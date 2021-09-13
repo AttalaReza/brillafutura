@@ -3,7 +3,7 @@
 @section('title', 'Edit Event - Admin')
 
 @section('user')
-{{"Reza"}}
+{{ $data['user']->name }}
 @endsection
 
 @section('content')
@@ -31,10 +31,6 @@
                     <div class="form-group">
                         <label for="name">Nama Event</label>
                         <input class="form-control" id="name" name="name" type="text" value="{{ $data['event']->name }}" placeholder="Masukkan nama event" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="sponsor">Sponsor Event</label>
-                        <input class="form-control" id="sponsor" name="sponsor" type="text" value="{{ $data['event']->sponsor }}" placeholder="Masukkan nama sponsor event" required />
                     </div>
                     <div class="form-group">
                         <label for="description">Deskripsi Event</label>
@@ -135,7 +131,7 @@
                         <div class="form-row">
                             <div class="col-8">
                                 <div class="text-center">
-                                    <img src="{{ asset('/storage/images/'.$data['event']->file_image) }}" alt="{{ $data['event']->file_image }}" width="400" />
+                                    <img src="{{ asset('/storage/images/events/'.$data['event']->file_image) }}" alt="{{ $data['event']->file_image }}" width="500" />
                                 </div>
                             </div>
                             <div class="col-4">

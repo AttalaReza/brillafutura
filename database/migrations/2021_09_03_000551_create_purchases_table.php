@@ -18,8 +18,8 @@ class CreatePurchasesTable extends Migration
             $table->integer('user_id')->nullable();
             $table->integer('event_id')->nullable();
             $table->string('ticket')->nullable();
+            $table->integer('ticket_price')->nullable();
             $table->integer('amount')->nullable();
-            $table->string('ticket_price')->nullable();
             $table->integer('payment_amount')->nullable();
             $table->string('code')->nullable();
             $table->timestamps();

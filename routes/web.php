@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ToolController;
 
 
 /*
@@ -23,19 +25,18 @@ use App\Http\Controllers\EventController;
 
 
 Route::group(['middleware' => 'auth:sanctum', 'verified'], function () {
+
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+
     Route::get('/events/add', [EventController::class, 'add'])->name('events.add');
     Route::resource('events', EventController::class);
 
-    Route::get('/tools', function () {
-        return view('admin.tools.index');
-    });
-    Route::get('/tickets', function () {
-        return view('admin.tickets.index');
-    });
-    Route::get('/tickets/purchasers', function () {
-        return view('admin.tickets.purchasers');
-    });
-    Route::get('/rentals', function () {
-        return view('admin.rentals.index');
-    });
+    Route::get('/tools/add', [ToolController::class, 'add'])->name('tools.add');
+    Route::resource('tools', ToolController::class);
+
+    Route::get('/tickets', [AdminController::class, 'showTickets'])->name('tickets.index');
+    Route::get('/tickets/{id}/purchasers', [AdminController::class, 'showPurchasers'])->name('tickets.purchasers');
+
+    Route::get('/rentals', [AdminController::class, 'showRentals'])->name('rentals.index');
+    Route::post('/rentals/{id}/status', [AdminController::class, 'changeRentalStatus'])->name('rental.status');
 });

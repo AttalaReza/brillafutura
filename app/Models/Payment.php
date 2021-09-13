@@ -27,6 +27,6 @@ class Payment extends Model
     }
     public function rental()
     {
-        return $this->belongsTo('App\Models\Reantal');
+        return $this->belongsTo('App\Models\Rental');
     }
 }

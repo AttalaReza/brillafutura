@@ -3,7 +3,7 @@
 @section('title', 'Tambah Event - Admin')
 
 @section('user')
-{{"Reza"}}
+{{ $data['user']->name }}
 @endsection
 
 @section('content')
@@ -41,10 +41,6 @@
                     <div class="form-group">
                         <label for="name">Nama Event</label>
                         <input class="form-control" id="name" name="name" type="text" placeholder="Masukkan nama event" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="sponsor">Sponsor Event</label>
-                        <input class="form-control" id="sponsor" name="sponsor" type="text" placeholder="Masukkan nama sponsor event" required />
                     </div>
                     <div class="form-group">
                         <label for="description">Deskripsi Event</label>

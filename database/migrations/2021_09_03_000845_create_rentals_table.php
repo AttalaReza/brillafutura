@@ -21,8 +21,8 @@ class CreateRentalsTable extends Migration
             $table->string('end_date')->nullable();
             $table->integer('duration')->nullable();
             $table->string('location')->nullable();
-            $table->integer('peyment_amount')->nullable();
-            $table->integer('repayment')->nullable();
+            $table->integer('payment_amount')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
