@@ -10,7 +10,7 @@
 
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Dashboard</h1>
+        <h1 class="mt-4">Edit Alat Event {{ $data['tool']->name }}</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">Alat Event / Edit {{ $data['tool']->name }}</li>
         </ol>
@@ -28,7 +28,7 @@
             <div class="card-header">
                 <h4>
                     <i class="fas fa-plus-square mr-1"></i>
-                    Menambahkan Paket Alat Baru
+                    Mengubah Alat Event
                     <div class="float-right">
                         <a class="btn btn-secondary btn-sm" href="{{ route('tools.index') }}">Back</a>
                     </div>

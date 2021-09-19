@@ -10,9 +10,9 @@
 
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Dashboard</h1>
+        <h1 class="mt-4">Alat Event</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Alat Event</li>
+            <li class="breadcrumb-item active">Data Semua Alat Event</li>
         </ol>
         @if (session('success'))
         <div class="alert alert-success">
@@ -26,7 +26,7 @@
         @endif
         <div class="card mb-4">
             <div class="card-header">
-                <h4><i class="fas fa-table mr-1"></i>Data Event
+                <h4><i class="fas fa-table mr-1"></i>Data Alat Event
                     <div class="float-right">
                         <a class="btn btn-primary" href="{{ route('tools.add') }}">Tambah Alat Event</a>
                     </div>

@@ -10,7 +10,7 @@
 
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Dashboard</h1>
+        <h1 class="mt-4">Tambah Alat Event</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">Alat Event / Menambahkan Alat Event Baru</li>
         </ol>
@@ -28,7 +28,7 @@
             <div class="card-header">
                 <h4>
                     <i class="fas fa-plus-square mr-1"></i>
-                    Menambahkan Paket Alat Baru
+                    Menambahkan Alat Event Baru
                     <div class="float-right">
                         <a class="btn btn-secondary btn-sm" href="{{ route('tools.index') }}">Back</a>
                     </div>

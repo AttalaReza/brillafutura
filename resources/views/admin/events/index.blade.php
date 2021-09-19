@@ -10,9 +10,9 @@
 
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Dashboard</h1>
+        <h1 class="mt-4">Event</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Event</li>
+            <li class="breadcrumb-item active">Data Semua Event</li>
         </ol>
         @if (session('success'))
         <div class="alert alert-success">
@@ -63,13 +63,13 @@
                                     <img class="mt-2" src="{{ asset('/storage/images/events/'.$event->file_image) }}" alt="{{ $event->file_image }}" width="120" />
                                 </td>
                                 <td>{{ $event->description }}</td>
-                                <td width="150">
+                                <td width="180">
                                     @php ($p1 = number_format($event->presale_1))
-                                    <b>Presale 1</b>: {{ $p1 }} <br />
+                                    <b>Presale 1</b>: {{ $p1." x ".$event->presale_1_quota }} <br />
                                     @php ($p2 = number_format($event->presale_2))
-                                    <b>Presale 2</b>: {{ $p2 }} <br />
+                                    <b>Presale 2</b>: {{ $p2." x ".$event->presale_2_quota }} <br />
                                     @php ($os = number_format($event->onsale))
-                                    <b>Onsale</b>: {{ $os }} <br />
+                                    <b>Onsale</b>: {{ $os." x ".$event->onsale_quota }} <br />
                                 </td>
                                 <td>{{ $event->location }}</td>
                                 @isset ($event->end_date)

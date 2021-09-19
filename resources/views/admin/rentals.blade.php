@@ -10,7 +10,7 @@
 
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Dashboard</h1>
+        <h1 class="mt-4">Penyewaan Alat</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">Penyewaan Alat</li>
         </ol>
@@ -26,7 +26,11 @@
         @endif
         <div class="card mb-4">
             <div class="card-header">
-                <h4><i class="fas fa-table mr-1"></i>Data Penyewaan Alat</h4>
+                <h4><i class="fas fa-table mr-1"></i>Data Penyewaan Alat
+                    <div class="float-right">
+                        <!-- <a title="Download Excel Data Penyewaan" class="btn btn-success btn-sm" href="#">Excel Download</a> -->
+                    </div>
+                </h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -78,12 +82,14 @@
                                     @if ($payment->rental->status == "lunas")
                                     @php ($d = date("H:i, j M Y", strtotime($payment->rental->updated_at)))
                                     <button title="Telah Lunas" class="btn btn-success btn-sm" onclick="return alert('Penyewaan ini telah LUNAS pada {{ $d }}')">Lunas</button>
+                                    <br />
                                     @else
                                     <form action="{{ route('rental.status', ['id' => $payment->rental->id]) }}" method="POST">
                                         @csrf
                                         <button title="Ubah ke Lunas" type="submit" class="btn btn-warning btn-sm" onclick="return confirm('Apakah Anda yakin ingin mengubah status penyewaan menjadi LUNAS?')">Sudah DP 50%</button>
                                     </form>
                                     @endif
+                                    <a title="Download" class="btn btn-primary btn-sm mt-1" href="#"><i class="fas fa-download mr-1"></i> Invoice</a>
                                 </td>
                             </tr>
                             @endforeach
