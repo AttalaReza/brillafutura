@@ -41,8 +41,9 @@ Route::group(['middleware' => 'auth:sanctum', 'verified'], function () {
     Route::get('/admin/tickets', [AdminController::class, 'showTickets'])->name('tickets.index');
     Route::get('/admin/tickets/{id}/purchasers', [AdminController::class, 'showPurchasers'])->name('tickets.purchasers');
 
-    Route::get('/admin/tickets/{id}/purchasers/export/{key}', [AdminController::class, 'export'])->name('export');
+    Route::get('/admin/tickets/{id}/purchasers/export/{key}', [AdminController::class, 'purchasersExport'])->name('purchasers.export');
 
     Route::get('/admin/rentals', [AdminController::class, 'showRentals'])->name('rentals.index');
     Route::post('/admin/rentals/{id}/status', [AdminController::class, 'changeRentalStatus'])->name('rental.status');
+    Route::post('/admin/rentals/export', [AdminController::class, 'rentalsExport'])->name('rentals.export');
 });

@@ -29,7 +29,7 @@
         </div>
         @endif
         <div class="card mb-4">
-            <a title="Download Excel Data Pembeli" class="btn btn-success right" href="{{ route('export', ['id' => $data['event']->id, 'key' => $data['key'] ]) }}"><i class="fas fa-download mr-1"></i> Excel</a>
+            <a title="Download Excel Data Pembeli" class="btn btn-success" href="{{ route('purchasers.export', ['id' => $data['event']->id, 'key' => $data['key'] ]) }}"><i class="fas fa-download mr-1"></i> Excel</a>
         </div>
         <div class="card mb-4">
             <div class="card-header">
@@ -117,8 +117,8 @@
                             @foreach ($data['payments'] as $payment)
                             <tr>
                                 @php ($time = date("G:i", strtotime($payment->created_at)))
-                                @php ($date = date("d M Y", strtotime($payment->created_at)))
-                                <td>{{ $time }}</br>{{ $date }}</td>
+                                @php ($date = date("Y-m-d", strtotime($payment->created_at)))
+                                <td>{{ $date }}<br />{{ $time }}</td>
                                 <td>{{ $payment->user->name }}</td>
                                 <td>{{ $payment->purchase->ticket }}</td>
                                 @php ($tp = number_format($payment->purchase->ticket_price))

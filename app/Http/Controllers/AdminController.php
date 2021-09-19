@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Exports\PurchasersExport;
+use App\Exports\RentalsExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 use App\Models\Event;
-use App\Models\Ticket;
+use App\Models\Tool;
 use App\Models\Rental;
 use App\Models\Payment;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -23,8 +23,12 @@ class AdminController extends Controller
         if ($user->role == 0) {
             return redirect()->route('dashboard');
         }
+        $events = Event::all();
+        $tools = Tool::all();
         $data = [
-            'user' => $user
+            'user' => $user,
+            'events' => $events->count(),
+            'tools' => $tools->count(),
         ];
         return view('admin.index', compact('data'));
     }
@@ -104,7 +108,7 @@ class AdminController extends Controller
     }
 
     // download excel
-    public function export($id, $key)
+    public function purchasersExport($id, $key)
     {
         $event = Event::find($id);
         $check = md5($event->name);
@@ -152,5 +156,24 @@ class AdminController extends Controller
 
         return redirect()->route('rentals.index')
             ->with('success', 'change status to LUNAS has been successful');
+    }
+
+    // download excel
+    public function rentalsExport(Request $request)
+    {
+        $month = $request->input('month');
+        $year = $request->input('year');
+        if ($month == 0) {
+            return redirect()->route('rentals.index')
+                ->with('failed', 'Silahkan pilih Bulan terlebih dahulu');
+        }
+        if (strlen($year) == 4) {
+            if ($month == 13) {
+                $month = 0;
+            }
+            return Excel::download(new RentalsExport($month, $year), 'Penyewa-' . $month . '-' . $year . '.xlsx');
+        }
+        return redirect()->route('rentals.index')
+            ->with('failed', 'Tahun minimal 4 angka');
     }
 }

@@ -7,12 +7,10 @@ use App\Models\Payment;
 
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
-use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class PurchasersExport implements FromView
+class PurchasersExport implements FromView, ShouldAutoSize
 {
-    use Exportable;
-
     public function __construct(int $id)
     {
         $this->event_id = $id;

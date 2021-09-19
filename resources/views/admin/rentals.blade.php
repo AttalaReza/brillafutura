@@ -25,22 +25,64 @@
         </div>
         @endif
         <div class="card mb-4">
-            <div class="card-header">
-                <h4><i class="fas fa-table mr-1"></i>Data Penyewaan Alat
-                    <div class="float-right">
-                        <!-- <a title="Download Excel Data Penyewaan" class="btn btn-success btn-sm" href="#">Excel Download</a> -->
+            <div class="card-body">
+                <form action="{{ route('rentals.export') }}" method="POST">
+                    @csrf
+                    <label>Download data Excel, Silakan pilih bulan dan tahun</label>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Bulan</span>
+                                    </div>
+                                    <select class="custom-select" id="month" name="month" required>
+                                        <option selected disabled value="0">Pilihlah ...</option>
+                                        <option value="1">Januari</option>
+                                        <option value="2">Februari</option>
+                                        <option value="3">Maret</option>
+                                        <option value="4">April</option>
+                                        <option value="5">Mei</option>
+                                        <option value="6">Juni</option>
+                                        <option value="7">Juli</option>
+                                        <option value="8">Agustus</option>
+                                        <option value="9">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">Desember</option>
+                                        <option value="13">Sepanjang Tahun</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Tahun</span>
+                                    </div>
+                                    <input class="form-control" id="year" name="year" type="number" placeholder="4 digits" minlength="4" maxlength="4" required />
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" title="Download Excel Data Penyewa" class="btn btn-success btn-block" href=><i class="fas fa-download mr-1"></i> Excel</button>
+                            </div>
+                        </div>
                     </div>
-                </h4>
+                </form>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4><i class="fas fa-table mr-1"></i>Data Penyewaan Alat</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>Tanggal Bayar</th>
                                 <th>Penyewa</th>
-                                <th>Paket</th>
+                                <th>Alat</th>
                                 <th>Tanggal Sewa</th>
-                                <th>Durasi</th>
                                 <th>Lokasi</th>
                                 <th>Biaya</th>
                                 <th>Status</th>
@@ -48,10 +90,10 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>Tanggal Bayar</th>
                                 <th>Penyewa</th>
                                 <th>Paket</th>
                                 <th>Tanggal Sewa</th>
-                                <th>Durasi</th>
                                 <th>Lokasi</th>
                                 <th>Biaya</th>
                                 <th>Status</th>
@@ -60,24 +102,31 @@
                         <tbody>
                             @foreach ($data['payments'] as $payment)
                             <tr>
+                                @php ($date = date( "Y-m-d, H:i", strtotime($payment->created_at)))
+                                <td>{{ $date }} <br />{{ $payment->type }}</td>
                                 <td>{{ $payment->rental->user->name }}</td>
                                 @php ($pp = number_format($payment->rental->tool->price))
                                 <td>{{ $payment->rental->tool->name }}</br>{{ $pp }}</td>
                                 @isset ($payment->rental->end_date)
                                 @if ($payment->rental->start_date == $payment->rental->end_date)
-                                @php ($date = date("j M Y", strtotime($payment->rental->start_date)))
+                                @php ($date = date( "d M Y", strtotime($payment->rental->start_date)))
                                 @else
-                                @php ($date = date("j", strtotime($payment->rental->start_date)) . "-" . date("j M Y", strtotime($payment->rental->end_date)))
+                                @php ($date = date( "d", strtotime($payment->rental->start_date)) . "-" . date( "d M Y", strtotime($payment->rental->end_date)))
                                 @endif
                                 @endisset
                                 @empty ($payment->rental->end_date)
-                                @php ($date = date("j M Y", strtotime($payment->rental->start_date)))
+                                @php ($date = date( "d M Y", strtotime($payment->rental->start_date)))
                                 @endempty
                                 <td>{{ $date }}</td>
-                                <td>{{ $payment->rental->duration }} hari</td>
                                 <td>{{ $payment->rental->location }}</td>
                                 @php ($pa = number_format($payment->rental->payment_amount))
-                                <td><b>{{ $pa }}</b></td>
+                                <td>
+                                    <b>{{ $pa }}</b>
+                                    @if ($payment->rental->status == "dp")
+                                    @php ($pa = number_format($payment->rental->payment_amount/2))
+                                    <br />Paid: {{ $pa }}
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     @if ($payment->rental->status == "lunas")
                                     @php ($d = date("H:i, j M Y", strtotime($payment->rental->updated_at)))

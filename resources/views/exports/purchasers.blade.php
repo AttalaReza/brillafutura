@@ -1,4 +1,4 @@
-<table>
+<table border="1">
     <tr>
         <th><b>Kategori</b></th>
         <th><b>Terjual</b></th>
@@ -13,7 +13,7 @@
         <td>{{ $data['details']['presale_1_sold'] }}</td>
         <td>{{ $data['details']['presale_1_remaining'] }}</td>
         @php ($t = number_format($data['details']['presale_1']))
-        <td><b>Rp {{ $t }}</b></td>
+        <td><b> {{ $t }}</b></td>
         <td></td>
         <td></td>
         <td></td>
@@ -23,7 +23,7 @@
         <td>{{ $data['details']['presale_2_sold'] }}</td>
         <td>{{ $data['details']['presale_2_remaining'] }}</td>
         @php ($t = number_format($data['details']['presale_2']))
-        <td><b>Rp {{ $t }}</b></td>
+        <td><b> {{ $t }}</b></td>
         <td></td>
         <td></td>
         <td></td>
@@ -33,7 +33,7 @@
         <td>{{ $data['details']['onsale_sold'] }}</td>
         <td>{{ $data['details']['onsale_remaining'] }}</td>
         @php ($t = number_format($data['details']['onsale']))
-        <td><b>Rp {{ $t }}</b></td>
+        <td><b> {{ $t }}</b></td>
         <td></td>
         <td></td>
         <td></td>
@@ -45,7 +45,7 @@
         @php ($total = number_format($data['details']['presale_1_remaining'] + $data['details']['presale_2_remaining'] + $data['details']['onsale_remaining']))
         <th><b>{{ $total }} Tiket</b></th>
         @php ($total = number_format($data['details']['presale_1'] + $data['details']['presale_2'] + $data['details']['onsale']))
-        <th><b>Rp {{ $total }}</b></th>
+        <th><b> {{ $total }}</b></th>
         <th></th>
         <th></th>
         <th></th>

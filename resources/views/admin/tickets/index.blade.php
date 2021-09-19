@@ -54,13 +54,13 @@
                                 <td>{{ $event->location }}</td>
                                 @isset ($event->end_date)
                                 @if ($event->start_date == $event->end_date)
-                                @php ($date = date("j M Y", strtotime($event->start_date)))
+                                @php ($date = date( "d M Y", strtotime($event->start_date)))
                                 @else
-                                @php ($date = date("j", strtotime($event->start_date)) . "-" . date("j M Y", strtotime($event->end_date)))
+                                @php ($date = date( "d", strtotime($event->start_date)) . "-" . date( "d M Y", strtotime($event->end_date)))
                                 @endif
                                 @endisset
                                 @empty ($event->end_date)
-                                @php ($date = date("j M Y", strtotime($event->start_date)))
+                                @php ($date = date( "d M Y", strtotime($event->start_date)))
                                 @endempty
                                 <td>{{ $date }}</td>
                                 <td class="text-center">
