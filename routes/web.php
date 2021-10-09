@@ -24,9 +24,13 @@ use App\Http\Controllers\ToolController;
 //     return view('dashboard');
 // })->name('dashboard');
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('landing');
+Route::get('/home', [HomeController::class, 'index'])->name('landing');
+Route::get('/events', [HomeController::class, 'showEvents'])->name('landing.events');
+Route::get('/events/{id}/show', [HomeController::class, 'showOneEvent'])->name('landing.event.show');
+Route::get('/tools', [HomeController::class, 'showTools'])->name('landing.tools');
 
-
+Route::post('/events/checkout', [HomeController::class, 'checkout'])->name('ticket.checkout');
 
 Route::group(['middleware' => 'auth:sanctum', 'verified'], function () {
 
@@ -46,4 +50,6 @@ Route::group(['middleware' => 'auth:sanctum', 'verified'], function () {
     Route::get('/admin/rentals', [AdminController::class, 'showRentals'])->name('rentals.index');
     Route::post('/admin/rentals/{id}/status', [AdminController::class, 'changeRentalStatus'])->name('rental.status');
     Route::post('/admin/rentals/export', [AdminController::class, 'rentalsExport'])->name('rentals.export');
+
+    // Route::post('/events/checkout', [HomeController::class, 'checkout'])->name('ticket.checkout');
 });

@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Deskripsi Event</label>
-                        <textarea class="form-control" id="description" name="description" type="text" rows=3 placeholder="Masukkan deskripsi event" required>{{ $data['event']->description }}</textarea>
+                        <textarea class="form-control" id="description" name="description" type="text" rows=6 placeholder="Masukkan deskripsi event" required>{{ $data['event']->description }}</textarea>
                     </div>
                     <label>Nb: Deskripsi mencakup informasi umum, aturan, dan waktu pelaksanaan event</label>
                     <hr />
@@ -52,8 +52,8 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <label for="presale_1_quota">Jumlah Tiket</label>
-                                <input value="{{ $data['event']->presale_1_quota }}" class="form-control" id="presale_1_quota" name="presale_1_quota" type="number" min=0 />
+                                <label for="presale_1_ticket">Jumlah Tiket</label>
+                                <input value="{{ $data['event']->presale_1_ticket }}" class="form-control" id="presale_1_ticket" name="presale_1_ticket" type="number" min=0 />
                             </div>
                             <div class="col-3">
                                 <label for="presale_1_start">Penjualan Dimulai</label>
@@ -78,8 +78,8 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <label for="presale_2_quota">Jumlah Tiket</label>
-                                <input value="{{ $data['event']->presale_2_quota }}" class="form-control" id="presale_2_quota" name="presale_2_quota" type="number" min=0 />
+                                <label for="presale_2_ticket">Jumlah Tiket</label>
+                                <input value="{{ $data['event']->presale_2_ticket }}" class="form-control" id="presale_2_ticket" name="presale_2_ticket" type="number" min=0 />
                             </div>
                             <div class="col-3">
                                 <label for="presale_2_start">Penjualan Dimulai</label>
@@ -104,8 +104,8 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <label for="onsale_quota">Jumlah Tiket</label>
-                                <input value="{{ $data['event']->onsale_quota }}" class="form-control" id="onsale_quota" name="onsale_quota" type="number" min=0 />
+                                <label for="onsale_ticket">Jumlah Tiket</label>
+                                <input value="{{ $data['event']->onsale_ticket }}" class="form-control" id="onsale_ticket" name="onsale_ticket" type="number" min=0 />
                             </div>
                             <div class="col-3">
                                 <label for="onsale_start">Penjualan Dimulai</label>
@@ -146,7 +146,7 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                                <label for="file">Ganti Gambar Event</label>
+                                <label for="file">Ganti Gambar Event [Max. 2MB]</label>
                                 <input class="form-control-file" id="file" name="file" type="file" />
                             </div>
                         </div>

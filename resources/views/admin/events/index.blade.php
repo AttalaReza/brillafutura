@@ -40,8 +40,7 @@
                                 <th>Event</th>
                                 <th>Deskripsi</th>
                                 <th>Tiket</th>
-                                <th>Lokasi</th>
-                                <th>Tanggal</th>
+                                <th>Info</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -50,8 +49,7 @@
                                 <th>Event</th>
                                 <th>Deskripsi</th>
                                 <th>Tiket</th>
-                                <th>Lokasi</th>
-                                <th>Tanggal</th>
+                                <th>Info</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>
@@ -60,29 +58,29 @@
                             <tr>
                                 <td>
                                     {{ $event->name }}<br />
-                                    <img class="mt-2" src="{{ asset('/storage/images/events/'.$event->file_image) }}" alt="{{ $event->file_image }}" width="120" />
+                                    <img class="mt-2" src="{{ asset('/storage/images/events/'.$event->file_image) }}" alt="{{ $event->file_image }}" width="200" />
                                 </td>
                                 <td>{{ $event->description }}</td>
                                 <td width="180">
                                     @php ($p1 = number_format($event->presale_1))
-                                    <b>Presale 1</b>: {{ $p1." x ".$event->presale_1_quota }} <br />
+                                    <b>Presale 1</b>: <br />
+                                    Rp{{ $p1.", ".$event->presale_1_ticket }} tiket <br />
+                                    {{ $event->presale_1_date }} <br /><br />
                                     @php ($p2 = number_format($event->presale_2))
-                                    <b>Presale 2</b>: {{ $p2." x ".$event->presale_2_quota }} <br />
+                                    <b>Presale 2</b>: <br />
+                                    Rp{{ $p2.", ".$event->presale_2_ticket }} tiket <br />
+                                    {{ $event->presale_2_date }} <br /><br />
                                     @php ($os = number_format($event->onsale))
-                                    <b>Onsale</b>: {{ $os." x ".$event->onsale_quota }} <br />
+                                    <b>Onsale</b>: <br />
+                                    Rp{{ $os.", ".$event->onsale_ticket }} tiket <br />
+                                    {{ $event->onsale_date }}
                                 </td>
-                                <td>{{ $event->location }}</td>
-                                @isset ($event->end_date)
-                                @if ($event->start_date == $event->end_date)
-                                @php ($date = date("j M Y", strtotime($event->start_date)))
-                                @else
-                                @php ($date = date("j", strtotime($event->start_date)) . "-" . date("j M Y", strtotime($event->end_date)))
-                                @endif
-                                @endisset
-                                @empty ($event->end_date)
-                                @php ($date = date("j M Y", strtotime($event->start_date)))
-                                @endempty
-                                <td>{{ $date }}</td>
+                                <td width="120">
+                                    <b>Lokasi</b>: <br />
+                                    {{ $event->location }} <br /><br />
+                                    <b>Tanggal</b>: <br />
+                                    {{ $event->date }}
+                                </td>
                                 <td class="text-center">
                                     <form action="{{ route('events.destroy', $event->id) }}" method="POST">
                                         <a title="Edit" class="btn btn-warning btn-sm m-1" href="{{ route('events.edit', $event->id) }}">edit</a>

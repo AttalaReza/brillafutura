@@ -21,7 +21,7 @@ class AdminController extends Controller
     {
         $user = $auth::user();
         if ($user->role == 0) {
-            return redirect()->route('dashboard');
+            return redirect()->route('landing');
         }
         $events = Event::all();
         $tools = Tool::all();
@@ -70,14 +70,11 @@ class AdminController extends Controller
             'presale_1_sold' => 0,
             'presale_2_sold' => 0,
             'onsale_sold' => 0,
-            'presale_1_remaining' => $event->presale_1_quota,
-            'presale_2_remaining' => $event->presale_2_quota,
-            'onsale_remaining' => $event->onsale_quota,
+            'presale_1_remaining' => $event->presale_1_ticket,
+            'presale_2_remaining' => $event->presale_2_ticket,
+            'onsale_remaining' => $event->onsale_ticket,
         ];
-        $item = [];
-        foreach ($payments as $p) {
-            array_push($item, $p, $p, $p);
-        }
+        $item = $payments;
         foreach ($item as $i) {
             if ($i->purchase->ticket == 'presale_1') {
                 $details['presale_1'] = $details['presale_1'] + $i->purchase->payment_amount;

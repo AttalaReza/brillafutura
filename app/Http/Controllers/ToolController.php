@@ -15,9 +15,9 @@ class ToolController extends Controller
     public function index(Auth $auth)
     {
         $user = $auth::user();
-        // if ($user->role == 0) {
-        //     return redirect()->route('home');
-        // }
+        if ($user->role == 0) {
+            return redirect()->route('landing');
+        }
         $data = [
             'tools' => Tool::orderBy('name', 'ASC')->get(),
             'user' => $user
@@ -48,7 +48,7 @@ class ToolController extends Controller
                     ->with('failed', $name . ' already exists');
             }
         }
-        $file_name = $this->uploadFileImage($request);
+        $file_name = $this->_uploadFileImage($request);
         $request->merge([
             'slug' => Str::slug($name, '-'),
             'file_image' => $file_name
@@ -82,7 +82,7 @@ class ToolController extends Controller
         $name = $request->input('name');
         if ($request->file()) {
             Storage::disk('local')->delete('public/images/tools/' . $tool->file_image);
-            $file_name = $this->uploadFileImage($request);
+            $file_name = $this->_uploadFileImage($request);
         } else {
             $file_name = $tool->file_image;
         }
@@ -107,7 +107,7 @@ class ToolController extends Controller
     }
 
     // mengupload file gambar
-    public function uploadFileImage($request)
+    private function _uploadFileImage($request)
     {
         date_default_timezone_set('Asia/Jakarta');
         $name = $request->input('name');

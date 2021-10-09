@@ -15,11 +15,18 @@ class EventController extends Controller
     public function index(Auth $auth)
     {
         $user = $auth::user();
-        // if ($user->role == 0) {
-        //     return redirect()->route('home');
-        // }
+        if ($user->role == 0) {
+            return redirect()->route('landing');
+        }
+        $events = Event::orderBy('created_at', 'ASC')->get();
+        foreach ($events as $event) {
+            $event = $this->_setDate($event);
+            $event = $this->_setDatePresale1($event);
+            $event = $this->_setDatePresale2($event);
+            $event = $this->_setDateOnsale($event);
+        }
         $data = [
-            'events' => Event::orderBy('created_at', 'ASC')->get(),
+            'events' => $events,
             'user' => $user
         ];
         return view('admin.events.index', compact('data'));
@@ -48,7 +55,7 @@ class EventController extends Controller
                     ->with('failed', $name . ' event already exists');
             }
         }
-        $file_name = $this->uploadFileImage($request);
+        $file_name = $this->_uploadFileImage($request);
         $request->merge([
             'slug' => Str::slug($name, '-'),
             'file_image' => $file_name
@@ -82,11 +89,14 @@ class EventController extends Controller
         $name = $request->input('name');
         if ($request->file()) {
             Storage::disk('local')->delete('public/images/events/' . $event->file_image);
-            $file_name = $this->uploadFileImage($request);
+            $file_name = $this->_uploadFileImage($request);
         } else {
             $file_name = $event->file_image;
         }
         $request->merge([
+            'presale_1_quota' => $request->input('presale_1_quota'),
+            'presale_2_quota' => $request->input('presale_2_quota'),
+            'onsale_quota' => $request->input('onsale_quota'),
             'slug' => Str::slug($name, '-'),
             'file_image' => $file_name,
         ]);
@@ -107,7 +117,7 @@ class EventController extends Controller
     }
 
     // mengupload file gambar
-    public function uploadFileImage($request)
+    private function _uploadFileImage($request)
     {
         date_default_timezone_set('Asia/Jakarta');
         $name = $request->input('name');
@@ -129,5 +139,71 @@ class EventController extends Controller
                 ->with('failed', 'Your image file extension is wrong, please select a png, jpg, or jpeg image file');
         }
         return $file_name;
+    }
+
+    private function _setDate($data)
+    {
+        if ($data->end_date) {
+            if ($data->start_date === $data->end_date) {
+                $data->date = date("j M Y", strtotime($data->start_date));
+            } else {
+                $data->date = date("j", strtotime($data->start_date)) . "-" . date("j M Y", strtotime($data->end_date));
+            }
+        } else {
+            $data->date = date("j M Y", strtotime($data->start_date));
+        }
+        return $data;
+    }
+
+    private function _setDatePresale1($data)
+    {
+        if ($data->presale_1_start === null && $data->presale_1_end === null) {
+            $data->presale_1_date = "date is unset";
+            return $data;
+        }
+        if ($data->presale_1_end) {
+            if ($data->presale_1_start === $data->presale_1_end) {
+                $data->presale_1_date = date("j M Y", strtotime($data->presale_1_start));
+            } else {
+                $data->presale_1_date = date("j", strtotime($data->presale_1_start)) . "-" . date("j M Y", strtotime($data->presale_1_end));
+            }
+        } else {
+            $data->presale_1_date = date("j M Y", strtotime($data->presale_1_start));
+        }
+        return $data;
+    }
+    private function _setDatePresale2($data)
+    {
+        if ($data->presale_2_start === null && $data->presale_2_end === null) {
+            $data->presale_2_date = "date is unset";
+            return $data;
+        }
+        if ($data->presale_2_end) {
+            if ($data->presale_2_start === $data->presale_2_end) {
+                $data->presale_2_date = date("j M Y", strtotime($data->presale_2_start));
+            } else {
+                $data->presale_2_date = date("j", strtotime($data->presale_2_start)) . "-" . date("j M Y", strtotime($data->presale_2_end));
+            }
+        } else {
+            $data->presale_2_date = date("j M Y", strtotime($data->presale_2_start));
+        }
+        return $data;
+    }
+    private function _setDateOnsale($data)
+    {
+        if ($data->onsale_start === null && $data->onsale_end === null) {
+            $data->onsale_date = "date is unset";
+            return $data;
+        }
+        if ($data->onsale_end) {
+            if ($data->onsale_start === $data->onsale_end) {
+                $data->onsale_date = date("j M Y", strtotime($data->onsale_start));
+            } else {
+                $data->onsale_date = date("j", strtotime($data->onsale_start)) . "-" . date("j M Y", strtotime($data->onsale_end));
+            }
+        } else {
+            $data->onsale_date = date("j M Y", strtotime($data->onsale_start));
+        }
+        return $data;
     }
 }

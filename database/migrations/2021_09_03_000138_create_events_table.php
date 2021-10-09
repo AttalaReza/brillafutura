@@ -19,15 +19,15 @@ class CreateEventsTable extends Migration
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->integer('presale_1')->nullable();
-            $table->integer('presale_1_quota')->nullable();
+            $table->integer('presale_1_ticket')->nullable();
             $table->string('presale_1_start')->nullable();
             $table->string('presale_1_end')->nullable();
             $table->integer('presale_2')->nullable();
-            $table->integer('presale_2_quota')->nullable();
+            $table->integer('presale_2_ticket')->nullable();
             $table->string('presale_2_start')->nullable();
             $table->string('presale_2_end')->nullable();
             $table->integer('onsale')->nullable();
-            $table->integer('onsale_quota')->nullable();
+            $table->integer('onsale_ticket')->nullable();
             $table->string('onsale_start')->nullable();
             $table->string('onsale_end')->nullable();
             $table->string('location')->nullable();
