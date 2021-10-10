@@ -102,40 +102,25 @@
                         <tbody>
                             @foreach ($data['payments'] as $payment)
                             <tr>
-                                @php ($date = date( "Y-m-d, H:i", strtotime($payment->created_at)))
-                                <td>{{ $date }} <br />{{ $payment->type }}</td>
-                                <td>{{ $payment->rental->user->name }}</td>
-                                @php ($pp = number_format($payment->rental->tool->price))
-                                <td>{{ $payment->rental->tool->name }}</br>{{ $pp }}</td>
-                                @isset ($payment->rental->end_date)
-                                @if ($payment->rental->start_date == $payment->rental->end_date)
-                                @php ($date = date( "d M Y", strtotime($payment->rental->start_date)))
-                                @else
-                                @php ($date = date( "d", strtotime($payment->rental->start_date)) . "-" . date( "d M Y", strtotime($payment->rental->end_date)))
-                                @endif
-                                @endisset
-                                @empty ($payment->rental->end_date)
-                                @php ($date = date( "d M Y", strtotime($payment->rental->start_date)))
-                                @endempty
-                                <td>{{ $date }}</td>
+                                <td>{{ $payment->date }} <br /><br />{{ $payment->type }}</td>
+                                <td>{{ $payment->rental->user->name }} <br /><br />{{ $payment->rental->user->phone }}</td>
+                                <td>{{ $payment->rental->tool->name }} <br /><br />Rp {{ $payment->tool_cost }}</td>
+                                <td>{{ $payment->rental->date }}</td>
                                 <td>{{ $payment->rental->location }}</td>
-                                @php ($pa = number_format($payment->rental->payment_amount))
                                 <td>
-                                    <b>{{ $pa }}</b>
+                                    <b>Rp {{ $payment->payment_amount }}</b>
                                     @if ($payment->rental->status == "dp")
-                                    @php ($pa = number_format($payment->rental->payment_amount/2))
-                                    <br />Paid: {{ $pa }}
+                                    <br /><br />Sudah DP: <br />Rp {{ $payment->payment_paid }}
                                     @endif
                                 </td>
                                 <td class="text-center">
                                     @if ($payment->rental->status == "lunas")
-                                    @php ($d = date("H:i, j M Y", strtotime($payment->rental->updated_at)))
-                                    <button title="Telah Lunas" class="btn btn-success btn-sm" onclick="return alert('Penyewaan ini telah LUNAS pada {{ $d }}')">Lunas</button>
+                                    <button title="Telah Lunas" class="btn btn-success btn-sm" onclick="return alert('Penyewaan ini telah LUNAS pada pukul {{ $payment->update }}')">Lunas</button>
                                     <br />
                                     @else
                                     <form action="{{ route('rental.status', ['id' => $payment->rental->id]) }}" method="POST">
                                         @csrf
-                                        <button title="Ubah ke Lunas" type="submit" class="btn btn-warning btn-sm" onclick="return confirm('Apakah Anda yakin ingin mengubah status penyewaan menjadi LUNAS?')">Sudah DP 50%</button>
+                                        <button title="Ubah ke Lunas" type="submit" class="btn btn-warning btn-sm" onclick="return confirm('Apakah Anda yakin ingin mengubah status penyewaan menjadi LUNAS?')">Ubah ke Lunas?</button>
                                     </form>
                                     @endif
                                     <a title="Download" class="btn btn-primary btn-sm mt-1" href="#"><i class="fas fa-download mr-1"></i> Invoice</a>

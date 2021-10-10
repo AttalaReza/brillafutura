@@ -21,9 +21,9 @@ class EventController extends Controller
         $events = Event::orderBy('created_at', 'ASC')->get();
         foreach ($events as $event) {
             $event = $this->_setDate($event);
-            $event = $this->_setDatePresale1($event);
-            $event = $this->_setDatePresale2($event);
-            $event = $this->_setDateOnsale($event);
+            $event = $this->_setFormatPresale1($event);
+            $event = $this->_setFormatPresale2($event);
+            $event = $this->_setFormatOnsale($event);
         }
         $data = [
             'events' => $events,
@@ -155,8 +155,9 @@ class EventController extends Controller
         return $data;
     }
 
-    private function _setDatePresale1($data)
+    private function _setFormatPresale1($data)
     {
+        $data->presale_1_price = number_format($data->presale_1);
         if ($data->presale_1_start === null && $data->presale_1_end === null) {
             $data->presale_1_date = "date is unset";
             return $data;
@@ -172,8 +173,9 @@ class EventController extends Controller
         }
         return $data;
     }
-    private function _setDatePresale2($data)
+    private function _setFormatPresale2($data)
     {
+        $data->presale_2_price = number_format($data->presale_2);
         if ($data->presale_2_start === null && $data->presale_2_end === null) {
             $data->presale_2_date = "date is unset";
             return $data;
@@ -189,8 +191,9 @@ class EventController extends Controller
         }
         return $data;
     }
-    private function _setDateOnsale($data)
+    private function _setFormatOnsale($data)
     {
+        $data->onsale_price = number_format($data->onsale);
         if ($data->onsale_start === null && $data->onsale_end === null) {
             $data->onsale_date = "date is unset";
             return $data;

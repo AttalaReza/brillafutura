@@ -52,17 +52,7 @@
                             <tr>
                                 <td>{{ $event->name }}</td>
                                 <td>{{ $event->location }}</td>
-                                @isset ($event->end_date)
-                                @if ($event->start_date == $event->end_date)
-                                @php ($date = date( "d M Y", strtotime($event->start_date)))
-                                @else
-                                @php ($date = date( "d", strtotime($event->start_date)) . "-" . date( "d M Y", strtotime($event->end_date)))
-                                @endif
-                                @endisset
-                                @empty ($event->end_date)
-                                @php ($date = date( "d M Y", strtotime($event->start_date)))
-                                @endempty
-                                <td>{{ $date }}</td>
+                                <td>{{ $event->date }}</td>
                                 <td class="text-center">
                                     <a title="Daftar Pembeli" class="btn btn-info btn-sm m-1" href="{{ route('tickets.purchasers', $event->id) }}">Details</a>
                                 </td>

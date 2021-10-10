@@ -18,6 +18,7 @@ class CreateToolsTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
+            $table->string('type')->nullable();
             $table->integer('price')->nullable();
             $table->string('file_image')->nullable();
             $table->timestamps();

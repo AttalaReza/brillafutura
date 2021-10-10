@@ -40,8 +40,12 @@ class AdminController extends Controller
         if ($user->role == 0) {
             return redirect()->route('home');
         }
+        $events = Event::orderBy('created_at', 'ASC')->get();
+        foreach ($events as $event) {
+            $event = $this->_setDate($event);
+        }
         $data = [
-            'events' => Event::orderBy('created_at', 'ASC')->get(),
+            'events' => $events,
             'user' => $user
         ];
         return view('admin.tickets.index', compact('data'));
@@ -74,28 +78,32 @@ class AdminController extends Controller
             'presale_2_remaining' => $event->presale_2_ticket,
             'onsale_remaining' => $event->onsale_ticket,
         ];
-        $item = $payments;
-        foreach ($item as $i) {
-            if ($i->purchase->ticket == 'presale_1') {
-                $details['presale_1'] = $details['presale_1'] + $i->purchase->payment_amount;
-                $details['presale_1_sold'] = $details['presale_1_sold'] + $i->purchase->amount;
-                $details['presale_1_remaining'] = $details['presale_1_remaining'] - $i->purchase->amount;
+        foreach ($payments as $payment) {
+            $payment->date = date("Y-m-d", strtotime($payment->created_at));
+            $payment->time = date("G:i", strtotime($payment->created_at));
+            $payment->ticket_price = number_format($payment->purchase->ticket_price);
+            $payment->payment_amount = number_format($payment->purchase->payment_amount);
+
+            if ($payment->purchase->ticket == 'presale_1') {
+                $details['presale_1'] = $details['presale_1'] + $payment->purchase->payment_amount;
+                $details['presale_1_sold'] = $details['presale_1_sold'] + $payment->purchase->amount;
+                $details['presale_1_remaining'] = $details['presale_1_remaining'] - $payment->purchase->amount;
             }
-            if ($i->purchase->ticket == 'presale_2') {
-                $details['presale_2'] = $details['presale_2'] + $i->purchase->payment_amount;
-                $details['presale_2_sold'] = $details['presale_2_sold'] + $i->purchase->amount;
-                $details['presale_2_remaining'] = $details['presale_2_remaining'] - $i->purchase->amount;
+            if ($payment->purchase->ticket == 'presale_2') {
+                $details['presale_2'] = $details['presale_2'] + $payment->purchase->payment_amount;
+                $details['presale_2_sold'] = $details['presale_2_sold'] + $payment->purchase->amount;
+                $details['presale_2_remaining'] = $details['presale_2_remaining'] - $payment->purchase->amount;
             }
-            if ($i->purchase->ticket == 'onsale') {
-                $details['onsale'] = $details['onsale'] + $i->purchase->payment_amount;
-                $details['onsale_sold'] = $details['onsale_sold'] + $i->purchase->amount;
-                $details['onsale_remaining'] = $details['onsale_remaining'] - $i->purchase->amount;
+            if ($payment->purchase->ticket == 'onsale') {
+                $details['onsale'] = $details['onsale'] + $payment->purchase->payment_amount;
+                $details['onsale_sold'] = $details['onsale_sold'] + $payment->purchase->amount;
+                $details['onsale_remaining'] = $details['onsale_remaining'] - $payment->purchase->amount;
             }
         }
         $key = md5($event->name);
         $data = [
             'event' => $event,
-            'payments' => $item,
+            'payments' => $payments,
             'details' => $details,
             'user' => $user,
             'key' => $key,
@@ -131,6 +139,14 @@ class AdminController extends Controller
             ->whereIn('status', ['success', 'settlement'])
             ->orderBy('created_at', 'DESC')
             ->get();
+        foreach ($payments as $payment) {
+            $payment->date = date("Y-m-d, H:i", strtotime($payment->created_at));
+            $payment->tool_cost = number_format($payment->rental->tool->price);
+            $payment->rental = $this->_setDate($payment->rental);
+            $payment->payment_amount = number_format($payment->rental->payment_amount);
+            $payment->payment_paid = number_format($payment->rental->payment_amount/2);
+            $payment->update = date("H:i, j M Y", strtotime($payment->rental->updated_at));
+        }
         $data = [
             'user' => $user,
             'payments' => $payments,
@@ -172,5 +188,19 @@ class AdminController extends Controller
         }
         return redirect()->route('rentals.index')
             ->with('failed', 'Tahun minimal 4 angka');
+    }
+
+    private function _setDate($data)
+    {
+        if ($data->end_date) {
+            if ($data->start_date === $data->end_date) {
+                $data->date = date("j M Y", strtotime($data->start_date));
+            } else {
+                $data->date = date("j", strtotime($data->start_date)) . "-" . date("j M Y", strtotime($data->end_date));
+            }
+        } else {
+            $data->date = date("j M Y", strtotime($data->start_date));
+        }
+        return $data;
     }
 }

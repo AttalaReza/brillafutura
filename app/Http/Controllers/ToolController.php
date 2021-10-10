@@ -18,8 +18,12 @@ class ToolController extends Controller
         if ($user->role == 0) {
             return redirect()->route('landing');
         }
+        $tools = Tool::orderBy('name', 'ASC')->get();
+        foreach ($tools as $tool) {
+            $tool->cost = number_format($tool->price);
+        }
         $data = [
-            'tools' => Tool::orderBy('name', 'ASC')->get(),
+            'tools' => $tools,
             'user' => $user
         ];
         return view('admin.tools.index', compact('data'));

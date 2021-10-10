@@ -13,6 +13,7 @@ class Tool extends Model
         'name',
         'slug',
         'description',
+        'type',
         'price',
         'file_image',
     ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Tool;
 use App\Models\Payment;
 
 use Illuminate\Http\Request;
@@ -30,11 +31,10 @@ class HomeController extends Controller
         ];
         return view('landing.events.index', compact('data'));
     }
-
-    public function showOneEvent(Auth $auth, $id)
+    public function showOneEvent(Auth $auth, $slug)
     {
         $user = $auth::user();
-        $event = Event::find($id);
+        $event = Event::whereIn('slug', [$slug])->get()->first();
         $purchase_id = [];
         foreach ($event->purchase as $p) {
             array_push($purchase_id, $p->id);
@@ -57,13 +57,19 @@ class HomeController extends Controller
         dd($request->all());
     }
 
-    public function showTools(Auth $auth)
+    public function showRentals(Auth $auth)
     {
         $user = $auth::user();
+        $tools = Tool::orderBy('created_at', 'ASC')->get();
         $data = [
+            'tools' => $tools,
             'user' => $user
         ];
-        return view('landing.tools.index', compact('data'));
+        return view('landing.rentals.index', compact('data'));
+    }
+    public function showOneRental(Auth $auth, $id)
+    {
+
     }
 
     private function _setDate($data)

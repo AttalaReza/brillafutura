@@ -116,16 +116,12 @@
                         <tbody>
                             @foreach ($data['payments'] as $payment)
                             <tr>
-                                @php ($time = date("G:i", strtotime($payment->created_at)))
-                                @php ($date = date("Y-m-d", strtotime($payment->created_at)))
-                                <td>{{ $date }}<br />{{ $time }}</td>
+                                <td>{{ $payment->date }}<br />{{ $payment->time }}</td>
                                 <td>{{ $payment->user->name }}</td>
                                 <td>{{ $payment->purchase->ticket }}</td>
-                                @php ($tp = number_format($payment->purchase->ticket_price))
-                                <td>{{ $tp }}</td>
+                                <td>{{ $payment->ticket_price }}</td>
                                 <td>{{ $payment->purchase->amount }} tiket</td>
-                                @php ($pa = number_format($payment->purchase->payment_amount))
-                                <td><b>{{ $pa }}</b></td>
+                                <td><b>{{ $payment->payment_amount }}</b></td>
                                 <td class="text-center">
                                     <a title="Ticket Code" class="btn btn-primary btn-sm">{{ $payment->purchase->code }}</a>
                                 </td>

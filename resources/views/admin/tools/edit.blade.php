@@ -63,8 +63,15 @@
                                         <input class="form-control" id="price" name="price" type="number" min=1000 step=1000 value="{{ $data['tool']->price }}" placeholder="Masukkan harga paket" required />
                                     </div>
                                 </div>
+                                <label class="mb-1" for="price">Pilih Type Paket</label>
+                                <select class="custom-select" id="type" name="type" placeholder="Pilih type alat" required>
+                                    <option value="{{ $data['tool']->type }}" selected><strong>{{ $data['tool']->type }}</strong></option>
+                                    <option value="Ligthing">Ligthing</option>
+                                    <option value="Sound">Sound</option>
+                                    <option value="Event">Event</option>
+                                </select>
                                 <div class="form-group">
-                                    <label class="mb-1" for="file">Ganti Gambar Ilustrasi Paket</label>
+                                    <label class="mb-1" for="file">Ganti Gambar Ilustrasi Paket [Max. 2MB]</label>
                                     <input class="form-control-file" id="file" name="file" type="file" />
                                 </div>
                             </div>

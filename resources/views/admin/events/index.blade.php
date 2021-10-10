@@ -62,17 +62,14 @@
                                 </td>
                                 <td>{{ $event->description }}</td>
                                 <td width="180">
-                                    @php ($p1 = number_format($event->presale_1))
                                     <b>Presale 1</b>: <br />
-                                    Rp{{ $p1.", ".$event->presale_1_ticket }} tiket <br />
+                                    Rp {{ $event->presale_1_price.", ".$event->presale_1_ticket }} tiket <br />
                                     {{ $event->presale_1_date }} <br /><br />
-                                    @php ($p2 = number_format($event->presale_2))
                                     <b>Presale 2</b>: <br />
-                                    Rp{{ $p2.", ".$event->presale_2_ticket }} tiket <br />
+                                    Rp {{ $event->presale_2_price.", ".$event->presale_2_ticket }} tiket <br />
                                     {{ $event->presale_2_date }} <br /><br />
-                                    @php ($os = number_format($event->onsale))
                                     <b>Onsale</b>: <br />
-                                    Rp{{ $os.", ".$event->onsale_ticket }} tiket <br />
+                                    Rp {{ $event->onsale_price.", ".$event->onsale_ticket }} tiket <br />
                                     {{ $event->onsale_date }}
                                 </td>
                                 <td width="120">

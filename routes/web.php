@@ -27,8 +27,9 @@ use App\Http\Controllers\ToolController;
 Route::get('/', [HomeController::class, 'index'])->name('landing');
 Route::get('/home', [HomeController::class, 'index'])->name('landing');
 Route::get('/events', [HomeController::class, 'showEvents'])->name('landing.events');
-Route::get('/events/{id}/show', [HomeController::class, 'showOneEvent'])->name('landing.event.show');
-Route::get('/tools', [HomeController::class, 'showTools'])->name('landing.tools');
+Route::get('/events/{slug}/show', [HomeController::class, 'showOneEvent'])->name('landing.event.show');
+Route::get('/rentals', [HomeController::class, 'showRentals'])->name('landing.rentals');
+Route::get('/rentals/{slug}/show', [HomeController::class, 'showOneRental'])->name('landing.rental.show');
 
 Route::post('/events/checkout', [HomeController::class, 'checkout'])->name('ticket.checkout');
 

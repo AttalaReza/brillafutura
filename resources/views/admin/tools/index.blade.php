@@ -39,7 +39,8 @@
                             <tr>
                                 <th>Nama</th>
                                 <th>Deskripsi</th>
-                                <th>Harga per Hari</th>
+                                <th>Harga</th>
+                                <th>Type</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -47,7 +48,8 @@
                             <tr>
                                 <th>Nama</th>
                                 <th>Deskripsi</th>
-                                <th>Harga per Hari</th>
+                                <th>Harga</th>
+                                <th>Type</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>
@@ -59,8 +61,8 @@
                                     <img class="mt-2" src="{{ asset('/storage/images/tools/'.$tool->file_image) }}" alt="{{ $tool->file_image }}" width="120" />
                                 </td>
                                 <td>{{ $tool->description }}</td>
-                                @php ($p = number_format($tool->price))
-                                <td width=130>{{ $p }}</td>
+                                <td width=160>Rp {{ $tool->cost }} </td>
+                                <td width=160>{{ $tool-> type }} </td>
                                 <td class="text-center">
                                     <form action="{{ route('tools.destroy', $tool->id) }}" method="POST">
                                         <a title="Edit" class="btn btn-warning btn-sm m-1" href="{{ route('tools.edit', $tool->id) }}">edit</a>

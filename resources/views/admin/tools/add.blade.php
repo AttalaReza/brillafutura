@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <label class="mb-1" for="price">Harga Paket per Hari</label>
                                 <div class="input-group">
                                     <div class="input-group-append">
@@ -56,9 +56,18 @@
                                     <input class="form-control" id="price" name="price" type="number" min=1000 step=1000 placeholder="Masukkan harga paket" required />
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-4">
+                                <label class="mb-1" for="price">Pilih Type Paket</label>
+                                <select class="custom-select" id="type" name="type" placeholder="Pilih type alat" required>
+                                    <option selected disabled value="1">Pilihlah ...</option>
+                                    <option value="Ligthing">Ligthing</option>
+                                    <option value="Sound">Sound</option>
+                                    <option value="Event">Event</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
                                 <div class="form-group">
-                                    <label class="mb-1" for="file">Upload Gambar Ilustrasi Paket</label>
+                                    <label class="mb-1" for="file">Upload Gambar Ilustrasi Paket [Max. 2MB]</label>
                                     <input class="form-control-file" id="file" name="file" type="file" required />
                                 </div>
                             </div>
