@@ -31,8 +31,6 @@ Route::get('/events/{slug}/show', [HomeController::class, 'showOneEvent'])->name
 Route::get('/rentals', [HomeController::class, 'showRentals'])->name('landing.rentals');
 Route::get('/rentals/{slug}/show', [HomeController::class, 'showOneRental'])->name('landing.rental.show');
 
-Route::post('/events/checkout', [HomeController::class, 'checkout'])->name('ticket.checkout');
-
 Route::group(['middleware' => 'auth:sanctum', 'verified'], function () {
 
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
@@ -52,5 +50,6 @@ Route::group(['middleware' => 'auth:sanctum', 'verified'], function () {
     Route::post('/admin/rentals/{id}/status', [AdminController::class, 'changeRentalStatus'])->name('rental.status');
     Route::post('/admin/rentals/export', [AdminController::class, 'rentalsExport'])->name('rentals.export');
 
-    // Route::post('/events/checkout', [HomeController::class, 'checkout'])->name('ticket.checkout');
+    Route::post('/events/{slug}/checkout', [HomeController::class, 'ticketCheckout'])->name('ticket.checkout');
+    Route::post('/rentals/{slug}/checkout', [HomeController::class, 'rentalCheckout'])->name('rental.checkout');
 });

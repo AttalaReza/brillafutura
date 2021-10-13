@@ -17,7 +17,7 @@
             <div class="col-12">
                 <div class="page-header-content">
                     <div class="page-header-caption">
-                        <h2 class="page-title">Events</h2>
+                        <h2 class="page-title">{{ $data['event']->name }}</h2>
                     </div>
                     <!--~~./ page-header-caption ~~-->
                     <div class="breadcrumb-area">
@@ -69,16 +69,43 @@
                             <div class="entry-meta">
                                 <div class="entry-meta-author">
                                     <div class="entry-author-name">
-                                        Location: <b>{{ $data['event']->location }}</b>
+                                        <table>
+                                            <tr>
+                                                <td width="100">
+                                                    <h4 style="margin: 0;">Location</h4>
+                                                </td>
+                                                <td width="20">
+                                                    <h4 style="margin: 0;">:</h4>
+                                                </td>
+                                                <td>
+                                                    <h4 style="margin: 0;">{{ $data['event']->location }}</h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h4 style="margin: 0;">Date</h4>
+                                                </td>
+                                                <td>
+                                                    <h4 style="margin: 0;">:</h4>
+                                                </td>
+                                                <td>
+                                                    <h4 style="margin: 0;">{{ $data['event']->day.", ".$data['event']->date }}</h4>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                                 <!--./ entry-meta-author -->
-                                <div class="entry-date">{{ $data['event']->date }}</div>
+                                <!-- <div class="entry-date">{{ $data['event']->date }}</div> -->
                                 <!--./ entry-date -->
                             </div>
                             <!-- /.entry-meta -->
                             <div class="entry-content">
                                 <p>{{ $data['event']->description }}</p>
+                                <br />
+                                <h4>Terms and Conditions</h4>
+                                <p>Setelah menyelesaikan pembelian di situs web dan outlet kami, Anda akan menerima E-voucher dari Brilla Futura yang langsung dikirim ke e-mail Anda.
+                                <p>
                             </div>
                             <!-- /.entry-content -->
                         </div>
@@ -191,59 +218,57 @@
                         <h4 class="widget-title">Order Here</h4>
                         <!-- /.widget-title -->
                         <div class="widget-content">
-                            <form action="{{ route('ticket.checkout') }}" method="POST" class="php-email-form">
+                            <form action="{{ route('ticket.checkout', $data['event']->slug) }}" method="POST" class="php-email-form">
                                 @csrf
-
                                 <ul>
                                     @if ($data['event']->presale_1_status === "open")
                                     <li>
-                                        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
-                                            <div style="width: 50%;">Ticket</div>
+                                        <div class="form-group d-flex align-items-center justify-content-between">
+                                            <label class="w-50" style="color: black">Ticket</label>
                                             <input hidden id="ticket" name="ticket" value="presale_1" type="text" readonly />
                                             <input class="form-controller" id="_ticket" name="_ticket" value="Presale 1" type="text" readonly />
                                         </div>
-                                        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
-                                            <div style="width: 50%;">Amount</div>
-                                            <input onchange="calculate(placeholder)" class="form-controller" id="amount" name="amount" placeholder="{{ $data['event']->presale_1 }}" type="number" min="1" max="{{ $data['event']->presale_1_ticket }}" value="1" required />
+                                        <div class="form-group d-flex align-items-center justify-content-between">
+                                            <label class="w-50" style="color: black">Amount</label>
+                                            <input hidden id="ticket_price" name="ticket_price" value="" type="text" readonly />
+                                            <input onchange="calculate()" class="form-controller" id="amount" name="amount" placeholder="{{ $data['event']->presale_1 }}" type="number" min="1" max="{{ $data['event']->presale_1_ticket }}" value="1" required />
                                         </div>
-                                        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
-                                            <div style="width: 50%;">Price</div>
+                                        <div class="form-group d-flex align-items-center justify-content-between">
+                                            <label class="w-50" style="color: black">Price</label>
                                             <input class="form-controller" id="payment_amount" name="payment_amount" value="{{ $data['event']->presale_1_price }}" type="text" readonly />
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-block">Checkout</button>
                                     </li>
-                                    @endif
-                                    @if ($data['event']->presale_2_status === "open")
+                                    @elseif ($data['event']->presale_2_status === "open")
                                     <li>
-                                        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
-                                            <div style="width: 50%;">Ticket</div>
+                                        <div class="form-group d-flex align-items-center justify-content-between">
+                                            <label class="w-50" style="color: black">Ticket</label>
                                             <input hidden id="ticket" name="ticket" value="presale_2" type="text" readonly />
                                             <input class="form-controller" id="_ticket" name="_ticket" value="Presale 2" type="text" readonly />
                                         </div>
-                                        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
-                                            <div style="width: 50%;">Amount</div>
-                                            <input onchange="calculate(placeholder)" class="form-controller" id="amount" name="amount" placeholder="{{ $data['event']->presale_2 }}" type="number" min="1" max="{{ $data['event']->presale_2_ticket }}" value="1" required />
+                                        <div class="form-group d-flex align-items-center justify-content-between">
+                                            <label class="w-50" style="color: black">Amount</label>
+                                            <input onchange="calculate()" class="form-controller" id="amount" name="amount" placeholder="{{ $data['event']->presale_2 }}" type="number" min="1" max="{{ $data['event']->presale_2_ticket }}" value="1" required />
                                         </div>
-                                        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
-                                            <div style="width: 50%;">Price</div>
+                                        <div class="form-group d-flex align-items-center justify-content-between">
+                                            <label class="w-50" style="color: black">Price</label>
                                             <input class="form-controller" id="payment_amount" name="payment_amount" value="{{ $data['event']->presale_2_price }}" type="text" readonly />
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-block">Checkout</button>
                                     </li>
-                                    @endif
-                                    @if ($data['event']->onsale_status === "open")
+                                    @elseif ($data['event']->onsale_status === "open")
                                     <li>
-                                        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
-                                            <div style="width: 50%;">Ticket</div>
+                                        <div class="form-group d-flex align-items-center justify-content-between">
+                                            <label class="w-50" style="color: black">Ticket</label>
                                             <input hidden id="ticket" name="ticket" value="onsale" type="text" readonly />
                                             <input class="form-controller" id="_ticket" name="_ticket" value="Onsale" type="text" readonly />
                                         </div>
-                                        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
-                                            <div style="width: 50%;">Amount</div>
-                                            <input onchange="calculate(placeholder)" class="form-controller" id="amount" name="amount" placeholder="{{ $data['event']->onsale }}" type="number" min="1" max="{{ $data['event']->onsale_ticket }}" value="1" required />
+                                        <div class="form-group d-flex align-items-center justify-content-between">
+                                            <label class="w-50" style="color: black">Amount</label>
+                                            <input onchange="calculate()" class="form-controller" id="amount" name="amount" placeholder="{{ $data['event']->onsale }}" type="number" min="1" max="{{ $data['event']->onsale_ticket }}" value="1" required />
                                         </div>
-                                        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
-                                            <div style="width: 50%;">Price</div>
+                                        <div class="form-group d-flex align-items-center justify-content-between">
+                                            <label class="w-50" style="color: black">Price</label>
                                             <input class="form-controller" id="payment_amount" name="payment_amount" value="{{ $data['event']->onsale_price }}" type="text" readonly />
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-block">Checkout</button>
@@ -251,6 +276,25 @@
                                     @endif
                                 </ul>
                             </form>
+                            @if ($data['event']->presale_1_status != "open" && $data['event']->presale_2_status != "open" && $data['event']->onsale_status != "open")
+                            <ul>
+                                <li>
+                                    <div class="form-group d-flex align-items-center justify-content-between">
+                                        <label class="w-50" style="color: black">Ticket</label>
+                                        <input class="form-controller" value="-" type="text" readonly />
+                                    </div>
+                                    <div class="form-group d-flex align-items-center justify-content-between">
+                                        <label class="w-50" style="color: black">Amount</label>
+                                        <input class="form-controller" value="-" type="text" readonly />
+                                    </div>
+                                    <div class="form-group d-flex align-items-center justify-content-between">
+                                        <label class="w-50" style="color: black">Price</label>
+                                        <input class="form-controller" value="-" type="text" readonly />
+                                    </div>
+                                    <button class="btn btn-primary btn-block" disabled>Checkout</button>
+                                </li>
+                            </ul>
+                            @endif
                         </div>
                         <!-- /.widget-content -->
                     </aside>

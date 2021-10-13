@@ -1,5 +1,5 @@
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		Start Site Header
+Start Site Header
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <header class="site-header header-style-one">
     <div class="container">
@@ -21,7 +21,7 @@
                                 <div class="menu-content">
                                     <ul class="mainmenu">
                                         <li>
-                                            <a class="nav-link" href="{{ route('landing') }}">Home</a>
+                                            <a class="nav-link" href="#hero-block">Home</a>
                                         </li>
                                         <li>
                                             <a class="nav-link active" href="{{ route('landing.events') }}">Events</a>
@@ -36,9 +36,9 @@
                                                                 <div class="col-lg-12 megamenu-column">
                                                                     <h3 class="megamenu-heading">Sewa Alat</h3>
                                                                     <ul class="custom-megamenu">
-                                                                        <li><a href="#">Ligthing</a></li>
-                                                                        <li><a href="#">Sound</a></li>
-                                                                        <li><a href="#">Event</a></li>
+                                                                        <li><a href="{{ route('landing.rentals') }}">Lighting</a></li>
+                                                                        <li><a href="{{ route('landing.rentals') }}">Sound</a></li>
+                                                                        <li><a href="{{ route('landing.rentals') }}">Event</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -50,6 +50,52 @@
                                         <li>
                                             <a class="nav-link" href="#contact-block">Contact Us</a>
                                         </li>
+                                        @guest
+                                        <li>
+                                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                                        </li>
+                                        @endguest
+                                        @auth
+                                        <li class="megamenu">
+                                            @if ($data['user']->role === 1)
+                                            <a class="nav-link" href="#">Admin {{ $data['user']->name }}</a>
+                                            @else
+                                            <a class="nav-link" href="#">{{ $data['user']->name }}</a>
+                                            @endif
+                                            <ul class="sub-menu megamenu-main">
+                                                <li>
+                                                    <div class="megamenu-wrapper">
+                                                        <div class="container megamenu-container">
+                                                            <div class="row">
+                                                                <div class="col-lg-12 megamenu-column">
+                                                                    @if ($data['user']->role === 1)
+                                                                    <h3 class="megamenu-heading">Admin {{ $data['user']->name }}</h3>
+                                                                    @else
+                                                                    <h3 class="megamenu-heading">{{ $data['user']->name }}</h3>
+                                                                    @endif
+                                                                    <ul class="custom-megamenu">
+                                                                        @if ($data['user']->role === 1)
+                                                                        <li><a href="{{ route('admin') }}">Dashboard Admin</a></li>
+                                                                        @endif
+                                                                        <li><a href="#">Profile</a></li>
+                                                                        <li><a href="#">Riwayat Pembelian Tiket<br/>dan Penyewaan Alat</a></li>
+                                                                        <li>
+                                                                            <form action="{{ route('logout') }}" method="POST">
+                                                                                @csrf
+                                                                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit(); return confirm('Apakah Anda yakin ingin logout?')">
+                                                                                    Logout
+                                                                                </a>
+                                                                            </form>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        @endauth
                                     </ul> <!-- /.menu-list -->
                                 </div> <!-- /.hours-content-->
                             </div><!-- /.menu-wrapper -->

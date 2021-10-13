@@ -21,13 +21,13 @@ Start Site Header
                                 <div class="menu-content">
                                     <ul class="mainmenu">
                                         <li>
-                                            <a class="nav-link active" href="#hero-block">Home</a>
+                                            <a class="nav-link" href="#hero-block">Home</a>
                                         </li>
                                         <li>
                                             <a class="nav-link" href="{{ route('landing.events') }}">Events</a>
                                         </li>
                                         <li class="megamenu">
-                                            <a class="nav-link" href="#">Sewa Alat</a>
+                                            <a class="nav-link active" href="#">Sewa Alat</a>
                                             <ul class="sub-menu megamenu-main">
                                                 <li>
                                                     <div class="megamenu-wrapper">

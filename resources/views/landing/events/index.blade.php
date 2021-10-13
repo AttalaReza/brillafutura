@@ -48,9 +48,8 @@
                 <div class="blog-latest-items">
                     <div class="row">
                         @foreach ($data['events'] as $event)
-
                         <div class="col-lg-4 col-md-6">
-                            <article class="post post-grid service-item" style="padding: 16px; margin: 0 0 16px 0; cursor: pointer;" href="{{ route('landing.event.show', $event->slug) }}">
+                            <article class="post post-grid service-item" style="padding: 0; margin: 0 0 16px 0; cursor: pointer;" href="{{ route('landing.event.show', $event->slug) }}">
                                     <div class="post-thumb-area">
                                         <figure class="post-thumb">
                                             <a href="{{ route('landing.event.show', $event->slug) }}">

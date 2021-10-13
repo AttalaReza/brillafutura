@@ -34,6 +34,7 @@ class ToolController extends Controller
     {
         $user = $auth::user();
         $data = [
+            'type' => ["Ligthing", "Sound", "Event"],
             'user' => $user
         ];
         return view('admin.tools.add', compact('data'));
@@ -74,6 +75,7 @@ class ToolController extends Controller
         $user = $auth::user();
         $data = [
             'tool' => $tool,
+            'type' => ["Ligthing", "Sound", "Event"],
             'user' => $user
         ];
         return view('admin.tools.edit', compact('data'));

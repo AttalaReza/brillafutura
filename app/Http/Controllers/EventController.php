@@ -94,9 +94,6 @@ class EventController extends Controller
             $file_name = $event->file_image;
         }
         $request->merge([
-            'presale_1_quota' => $request->input('presale_1_quota'),
-            'presale_2_quota' => $request->input('presale_2_quota'),
-            'onsale_quota' => $request->input('onsale_quota'),
             'slug' => Str::slug($name, '-'),
             'file_image' => $file_name,
         ]);

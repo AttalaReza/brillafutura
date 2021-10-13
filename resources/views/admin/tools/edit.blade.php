@@ -66,9 +66,12 @@
                                 <label class="mb-1" for="price">Pilih Type Paket</label>
                                 <select class="custom-select" id="type" name="type" placeholder="Pilih type alat" required>
                                     <option value="{{ $data['tool']->type }}" selected><strong>{{ $data['tool']->type }}</strong></option>
-                                    <option value="Ligthing">Ligthing</option>
-                                    <option value="Sound">Sound</option>
-                                    <option value="Event">Event</option>
+                                    @foreach ($data['type'] as $type)
+                                    @if ($type == $data['tool']->type)
+                                    @continue
+                                    @endif
+                                    <option value="{{ $type }}">{{ $type }}</option>
+                                    @endforeach
                                 </select>
                                 <div class="form-group">
                                     <label class="mb-1" for="file">Ganti Gambar Ilustrasi Paket [Max. 2MB]</label>
