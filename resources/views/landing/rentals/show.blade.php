@@ -106,7 +106,7 @@
                                     <div class="w-100 d-flex flex-wrap">
                                         <div onclick="setStatus('lunas')" id="lunas" class="btn-sm py-1 px-4 btn-primary mt-1 mr-1 mb-1 actived" style="font-size: .75em">Lunas</div>
                                         <div onclick="setStatus('dp')" id="dp" class="btn-sm py-1 px-4 btn-primary m-1" style="font-size: .75em">DP 50%</div>
-                                        <input hidden id="status" value="" />
+                                        <input hidden name="status" id="status" value="" />
                                     </div>
                                 </div>
                                 <div class="form-group">

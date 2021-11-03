@@ -17,7 +17,10 @@ class Rental extends Model
         'duration',
         'location',
         'payment_amount',
-        'repayment',
+        'status',
+        'order_id',
+        'payment_token',
+        'redirect_url',
     ];
 
     public function user()

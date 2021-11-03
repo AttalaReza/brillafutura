@@ -17,6 +17,10 @@ class Purchase extends Model
         'ticket_price',
         'payment_amount',
         'code',
+        'status',
+        'order_id',
+        'payment_token',
+        'redirect_url',
     ];
 
     public function user()

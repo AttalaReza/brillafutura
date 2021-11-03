@@ -148,7 +148,7 @@ class PaymentController extends Controller
         $temp = explode('/', $order_id);
         $user_id = $temp[1];
         $rental_id = $temp[2];
-        $rental_status = strtolower($temp[4]);
+        $rental_status = strtolower($temp[3]);
 
         $payment_params = [
             'user_id' => $user_id,

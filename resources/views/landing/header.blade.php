@@ -58,9 +58,10 @@ Start Site Header
                                                                     <ul class="custom-megamenu">
                                                                         @if ($data['user']->role === 1)
                                                                         <li><a href="{{ route('admin') }}">Dashboard Admin</a></li>
-                                                                        @endif
+                                                                        @else
                                                                         <li><a href="{{ route('profile.index') }}">Profile</a></li>
                                                                         <li><a href="{{ route('profile.history') }}">Riwayat Pembelian Tiket<br />dan Penyewaan Alat</a></li>
+                                                                        @endif
                                                                         <li>
                                                                             <form action="{{ route('logout') }}" method="POST">
                                                                                 @csrf

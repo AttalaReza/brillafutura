@@ -191,14 +191,15 @@ class HomeController extends Controller
         $user = $auth::user();
         $tool = Tool::whereIn('slug', [$slug])->firstOrFail();
         $price = (int)$tool->price;
-        $num = ['Jan' => '01', 'Feb' => '02', 'Mar' => '03', 'Apr' => '04', 'May' => '05', 'Jun' => '06', 'Jul' => '07', 'Aug' => '08', 'Sep' => '09', 'Oct' => '10', 'Nov' => '11', 'Dec' => '12'];
         $temp = explode('-', $request->input('end_date'));
-        $start_date = $request->input('start_date');
+        $num = ['Jan' => '01', 'Feb' => '02', 'Mar' => '03', 'Apr' => '04', 'May' => '05', 'Jun' => '06', 'Jul' => '07', 'Aug' => '08', 'Sep' => '09', 'Oct' => '10', 'Nov' => '11', 'Dec' => '12'];
         $end_date = $temp[2] . "-" . $num[$temp[1]] . "-" . $temp[0];
+        $start_date = $request->input('start_date');
         $duration = (int)$request->input('duration');
         $location = $request->input('location');
         $payment_amount = (int)$request->input('duration') * $tool->price;
         $status = strtoupper($request->input('status'));
+        dd($request->all());
 
         $rental_id = Rental::insertGetId([
             'user_id' => $user->id,

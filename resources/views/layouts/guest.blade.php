@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <div class="font-sans text-gray-900 antialiased">
+    <div class="font-sans text-gray-900 antialiased bg-gray-100" style="padding-bottom: 6rem;">
         {{ $slot }}
     </div>
 </body>
