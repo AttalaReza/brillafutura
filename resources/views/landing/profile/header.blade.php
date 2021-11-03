@@ -21,7 +21,7 @@ Start Site Header
                                 <div class="menu-content">
                                     <ul class="mainmenu">
                                         <li>
-                                            <a class="nav-link active" href="{{ route('landing') }}">Beranda</a>
+                                            <a class="nav-link" href="{{ route('landing') }}">Beranda</a>
                                         </li>
                                         <li>
                                             <a class="nav-link" href="{{ route('landing.rentals') }}">Sewa Alat</a>
@@ -40,9 +40,9 @@ Start Site Header
                                         @auth
                                         <li class="megamenu">
                                             @if ($data['user']->role === 1)
-                                            <a class="nav-link" href="#">Admin {{ $data['user']->name }}</a>
+                                            <a class="nav-link active" href="#">Admin {{ $data['user']->name }}</a>
                                             @else
-                                            <a class="nav-link" href="#">{{ $data['user']->name }}</a>
+                                            <a class="nav-link active" href="#">{{ $data['user']->name }}</a>
                                             @endif
                                             <ul class="sub-menu megamenu-main">
                                                 <li>

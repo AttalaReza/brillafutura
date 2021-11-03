@@ -15,15 +15,15 @@
             <div class="col-12">
                 <div class="page-header-content">
                     <div class="page-header-caption">
-                        <h2 class="page-title">Events</h2>
+                        <h2 class="page-title">Event</h2>
                     </div>
                     <!--~~./ page-header-caption ~~-->
                     <div class="breadcrumb-area">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="{{ route('landing') }}">Home</a>
+                                <a href="{{ route('landing') }}">Beranda</a>
                             </li>
-                            <li class="breadcrumb-item active">Events</li>
+                            <li class="breadcrumb-item active">Event</li>
                         </ol>
                     </div>
                     <!--~~./ breadcrumb-area ~~-->
@@ -62,7 +62,7 @@
 
                                     <div class="post-details" style="padding: 16px;">
                                         <div class="entry-meta entry-meta-date">
-                                            <div class="entry-date">{{ $event->date }}</div>
+                                            <div class="entry-date">{{ $event->day }}, {{ $event->date }}</div>
                                         </div>
                                         <!--./ entry-meta-date -->
                                         <h2 class="entry-title">
@@ -72,7 +72,7 @@
                                         <div class="entry-meta">
                                             <div class="entry-meta-author">
                                                 <div class="entry-author-name">
-                                                    Location: <b>{{ $event->location }}</b>
+                                                    Lokasi: <b>{{ $event->location }}</b>
                                                 </div>
                                             </div>
                                             <!--./ entry-meta-author -->

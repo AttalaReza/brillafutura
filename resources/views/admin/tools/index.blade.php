@@ -60,7 +60,15 @@
                                     {{ $tool->name }} <br />
                                     <img class="mt-2" src="{{ asset('/storage/images/tools/'.$tool->file_image) }}" alt="{{ $tool->file_image }}" width="120" />
                                 </td>
-                                <td>{{ $tool->description }}</td>
+                                <td>
+                                    @foreach($tool->description as $desc)
+                                    @if ($desc == "#")
+                                    <br/>
+                                    @else
+                                    {{$desc}}
+                                    @endif
+                                    @endforeach
+                                </td>
                                 <td width=160>Rp {{ $tool->cost }} </td>
                                 <td width=160>{{ $tool-> type }} </td>
                                 <td class="text-center">

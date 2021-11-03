@@ -212,7 +212,7 @@ class HomeController extends Controller
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        $order_id = 'REN/' . $user->id . '/' . $rental_id . '/' . $payment_amount . '/' . $status . '/STAGING';
+        $order_id = 'REN/' . $user->id . '/' . $rental_id . '/' . $status . '/STAGING';
 
         // set payment midtrans snap-redirect
         $this->initPaymentGateway();

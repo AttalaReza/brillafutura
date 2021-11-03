@@ -82,11 +82,9 @@
                                 <h2 class="widget-title">Quick Links</h2>
                                 <div class="widget-content">
                                     <ul>
-                                        <li><a href="#">About Us</a></li>
-                                        <li><a href="#">Services</a></li>
-                                        <li><a href="#">Portfolio</a></li>
-                                        <li><a href="#">Blogs</a></li>
-                                        <li><a href="#">Contact Us</a></li>
+                                        <li><a href="{{ route('landing.rentals') }}">Sewa Alat</a></li>
+                                        <li><a href="{{ route('landing.events') }}">Event</a></li>
+                                        <li><a href="#contact-block">Kontak</a></li>
                                     </ul>
                                 </div>
                             </aside>

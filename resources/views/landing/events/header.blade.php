@@ -21,34 +21,16 @@ Start Site Header
                                 <div class="menu-content">
                                     <ul class="mainmenu">
                                         <li>
-                                            <a class="nav-link" href="#hero-block">Home</a>
+                                            <a class="nav-link" href="{{ route('landing') }}">Beranda</a>
                                         </li>
                                         <li>
-                                            <a class="nav-link active" href="{{ route('landing.events') }}">Events</a>
-                                        </li>
-                                        <li class="megamenu">
-                                            <a class="nav-link" href="#">Sewa Alat</a>
-                                            <ul class="sub-menu megamenu-main">
-                                                <li>
-                                                    <div class="megamenu-wrapper">
-                                                        <div class="container megamenu-container">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 megamenu-column">
-                                                                    <h3 class="megamenu-heading">Sewa Alat</h3>
-                                                                    <ul class="custom-megamenu">
-                                                                        <li><a href="{{ route('landing.rentals') }}">Lighting</a></li>
-                                                                        <li><a href="{{ route('landing.rentals') }}">Sound</a></li>
-                                                                        <li><a href="{{ route('landing.rentals') }}">Event</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                            <a class="nav-link" href="{{ route('landing.rentals') }}">Sewa Alat</a>
                                         </li>
                                         <li>
-                                            <a class="nav-link" href="#contact-block">Contact Us</a>
+                                            <a class="nav-link active" href="{{ route('landing.events') }}">Event</a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link" href="#contact-block">Kontak</a>
                                         </li>
                                         @guest
                                         <li>
@@ -77,8 +59,8 @@ Start Site Header
                                                                         @if ($data['user']->role === 1)
                                                                         <li><a href="{{ route('admin') }}">Dashboard Admin</a></li>
                                                                         @endif
-                                                                        <li><a href="#">Profile</a></li>
-                                                                        <li><a href="#">Riwayat Pembelian Tiket<br/>dan Penyewaan Alat</a></li>
+                                                                        <li><a href="{{ route('profile.index') }}">Profile</a></li>
+                                                                        <li><a href="{{ route('profile.history') }}">Riwayat Pembelian Tiket<br />dan Penyewaan Alat</a></li>
                                                                         <li>
                                                                             <form action="{{ route('logout') }}" method="POST">
                                                                                 @csrf
@@ -103,18 +85,6 @@ Start Site Header
                     </div><!--  /.site-navigation -->
 
                     <div class="header-navigation-right">
-                        <div class="search-wrap">
-                            <div class="search-btn">
-                                <i class="icofont-search"></i>
-                            </div>
-                            <div class="search-form">
-                                <form action="#">
-                                    <input type="search" placeholder="Search">
-                                    <button type="submit"><i class="icofont-search"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                        <!--~./ search-wrap ~-->
                         <div class="hamburger-menus">
                             <span></span>
                             <span></span>

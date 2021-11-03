@@ -21,7 +21,7 @@
                     <div class="breadcrumb-area">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="{{ route('landing') }}">Home</a>
+                                <a href="{{ route('landing') }}">Beranda</a>
                             </li>
                             <li class="breadcrumb-item active">Sewa Alat</li>
                         </ol>
@@ -46,7 +46,7 @@
             <div class="col-12 text-center">
                 <ul class="portfolio-filter">
                     <li>
-                        <a href="#" data-filter="*" class="filter active">All</a>
+                        <a href="#" data-filter="*" class="filter active">Semua</a>
                     </li>
                     <li>
                         <a href="#" data-filter=".Lighting" class="filter">Lighting</a>
@@ -62,7 +62,7 @@
         </div><!-- /.row -->
 
         <div class="row justify-content-center">
-            <div class="col-lg-11">
+            <div class="col-lg-12">
                 <div class="row portfolio-grid">
                     @foreach ($data['tools'] as $tool)
                     <div class="item col-lg-4 col-md-6 {{ $tool->type }}">
@@ -89,7 +89,7 @@
                                 <div class="entry-meta">
                                     <div class="entry-meta-author">
                                         <div class="entry-author-name">
-                                            <b>Rp {{ $tool->cost }}</b> / Day
+                                            <b>Rp {{ $tool->cost }}</b> / Hari
                                         </div>
                                     </div>
                                     <!--./ entry-meta-author -->

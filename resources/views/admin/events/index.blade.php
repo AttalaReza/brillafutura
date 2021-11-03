@@ -60,7 +60,15 @@
                                     {{ $event->name }}<br />
                                     <img class="mt-2" src="{{ asset('/storage/images/events/'.$event->file_image) }}" alt="{{ $event->file_image }}" width="200" />
                                 </td>
-                                <td>{{ $event->description }}</td>
+                                <td>
+                                    @foreach($event->description as $desc)
+                                    @if ($desc == "#")
+                                    <br />
+                                    @else
+                                    {{$desc}}
+                                    @endif
+                                    @endforeach
+                                </td>
                                 <td width="180">
                                     <b>Presale 1</b>: <br />
                                     Rp {{ $event->presale_1_price.", ".$event->presale_1_ticket }} tiket <br />

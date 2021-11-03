@@ -10,6 +10,18 @@
 				Hero Block
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <div id="hero-block" class="hero-block bg-white-smoke hero-block-one">
+    <div class="mx-5">
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+        @if (session('failed'))
+        <div class="alert alert-danger">
+            {{ session('failed') }}
+        </div>
+        @endif
+    </div>
     <div class="element-group">
         <div class="element one">
             <img src="{{ asset('albireo/images/element/rectangle2.png') }}" alt="Element">
