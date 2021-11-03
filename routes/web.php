@@ -5,7 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ToolController;
-
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,18 +19,18 @@ use App\Http\Controllers\ToolController;
 |
 */
 
-
-
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
-
 Route::get('/', [HomeController::class, 'index'])->name('landing');
 Route::get('/home', [HomeController::class, 'index'])->name('landing');
 Route::get('/events', [HomeController::class, 'showEvents'])->name('landing.events');
 Route::get('/events/{slug}/show', [HomeController::class, 'showOneEvent'])->name('landing.event.show');
 Route::get('/rentals', [HomeController::class, 'showRentals'])->name('landing.rentals');
 Route::get('/rentals/{slug}/show', [HomeController::class, 'showOneRental'])->name('landing.rental.show');
+
+// midtrans response
+Route::post('/payments/notification', [PaymentController::class, 'notification']);
+Route::get('/payments/completed', [PaymentController::class, 'completed']);
+Route::get('/payments/failed', [PaymentController::class, 'failed']);
+Route::get('/payments/unfinish', [PaymentController::class, 'unfinish']);
 
 Route::group(['middleware' => 'auth:sanctum', 'verified'], function () {
 
@@ -52,4 +53,9 @@ Route::group(['middleware' => 'auth:sanctum', 'verified'], function () {
 
     Route::post('/events/{slug}/checkout', [HomeController::class, 'ticketCheckout'])->name('ticket.checkout');
     Route::post('/rentals/{slug}/checkout', [HomeController::class, 'rentalCheckout'])->name('rental.checkout');
+
+    Route::get('profile', [UserController::class, 'index'])->name('profile.index');
+    Route::post('profile/{id}', [UserController::class, 'update'])->name('profile.update');
+    Route::get('profile/history', [UserController::class, 'showHistory'])->name('profile.history');
+    Route::delete('profile/history/{id}/delete', [UserController::class, 'deleteHistory'])->name('profile.history.delete');
 });

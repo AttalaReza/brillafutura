@@ -23,6 +23,9 @@ class CreateRentalsTable extends Migration
             $table->string('location')->nullable();
             $table->integer('payment_amount')->nullable();
             $table->string('status')->nullable();
+            $table->string('order_id')->nullable();
+            $table->string('payment_token')->nullable();
+            $table->string('redirect_url')->nullable();
             $table->timestamps();
         });
     }

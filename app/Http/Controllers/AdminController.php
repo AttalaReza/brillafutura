@@ -38,7 +38,7 @@ class AdminController extends Controller
     {
         $user = $auth::user();
         if ($user->role == 0) {
-            return redirect()->route('home');
+            return redirect()->route('landing');
         }
         $events = Event::orderBy('created_at', 'ASC')->get();
         foreach ($events as $event) {
@@ -56,7 +56,7 @@ class AdminController extends Controller
     {
         $user = $auth::user();
         if ($user->role == 0) {
-            return redirect()->route('home');
+            return redirect()->route('landing');
         }
         $event = Event::find($id);
         $purchase_id = [];
@@ -84,17 +84,17 @@ class AdminController extends Controller
             $payment->ticket_price = number_format($payment->purchase->ticket_price);
             $payment->payment_amount = number_format($payment->purchase->payment_amount);
 
-            if ($payment->purchase->ticket == 'presale_1') {
+            if ($payment->purchase->ticket == 'Presale 1') {
                 $details['presale_1'] = $details['presale_1'] + $payment->purchase->payment_amount;
                 $details['presale_1_sold'] = $details['presale_1_sold'] + $payment->purchase->amount;
                 $details['presale_1_remaining'] = $details['presale_1_remaining'] - $payment->purchase->amount;
             }
-            if ($payment->purchase->ticket == 'presale_2') {
+            if ($payment->purchase->ticket == 'Presale 2') {
                 $details['presale_2'] = $details['presale_2'] + $payment->purchase->payment_amount;
                 $details['presale_2_sold'] = $details['presale_2_sold'] + $payment->purchase->amount;
                 $details['presale_2_remaining'] = $details['presale_2_remaining'] - $payment->purchase->amount;
             }
-            if ($payment->purchase->ticket == 'onsale') {
+            if ($payment->purchase->ticket == 'Onsale') {
                 $details['onsale'] = $details['onsale'] + $payment->purchase->payment_amount;
                 $details['onsale_sold'] = $details['onsale_sold'] + $payment->purchase->amount;
                 $details['onsale_remaining'] = $details['onsale_remaining'] - $payment->purchase->amount;
@@ -128,7 +128,7 @@ class AdminController extends Controller
     {
         $user = $auth::user();
         if ($user->role == 0) {
-            return redirect()->route('home');
+            return redirect()->route('landing');
         }
         $rentals = Rental::all();
         $rental_id = [];
@@ -160,7 +160,7 @@ class AdminController extends Controller
         date_default_timezone_set('Asia/Jakarta');
         $user = $auth::user();
         if ($user->role == 0) {
-            return redirect()->route('home');
+            return redirect()->route('landing');
         }
         Rental::where('id', $id)->update([
             'status' => "lunas",

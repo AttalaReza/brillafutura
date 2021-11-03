@@ -13,8 +13,24 @@ class Payment extends Model
         'user_id',
         'purchase_id',
         'rental_id',
+        'code',
         'type',
         'status',
+    ];
+
+    public const PAYMENT_CHANNELS = [
+        "credit_card",
+        "gopay",
+        "shopeepay",
+        "bca_va",
+        "bni_va",
+        "bri_va",
+        "mandiri_clickpay",
+        "bca_klikbca",
+        "bca_klikpay",
+        "bri_epay",
+        "Indomaret",
+        "alfamart"
     ];
 
     public function user()

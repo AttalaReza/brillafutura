@@ -20,6 +20,7 @@ class EventController extends Controller
         }
         $events = Event::orderBy('created_at', 'ASC')->get();
         foreach ($events as $event) {
+            $event->description = explode(' ', $event->description);
             $event = $this->_setDate($event);
             $event = $this->_setFormatPresale1($event);
             $event = $this->_setFormatPresale2($event);

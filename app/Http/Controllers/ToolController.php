@@ -20,6 +20,7 @@ class ToolController extends Controller
         }
         $tools = Tool::orderBy('name', 'ASC')->get();
         foreach ($tools as $tool) {
+            $tool->description = explode(' ', $tool->description);
             $tool->cost = number_format($tool->price);
         }
         $data = [

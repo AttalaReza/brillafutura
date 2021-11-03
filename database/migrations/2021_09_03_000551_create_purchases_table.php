@@ -22,6 +22,10 @@ class CreatePurchasesTable extends Migration
             $table->integer('amount')->nullable();
             $table->integer('payment_amount')->nullable();
             $table->string('code')->nullable();
+            $table->string('status')->nullable();
+            $table->string('order_id')->nullable();
+            $table->string('payment_token')->nullable();
+            $table->string('redirect_url')->nullable();
             $table->timestamps();
         });
     }
