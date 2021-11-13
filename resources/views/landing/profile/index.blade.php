@@ -115,4 +115,6 @@ Start Page Title Area
 </div>
 <!--~~./ end services block ~~-->
 
+@include('landing.footer')
+
 @endsection

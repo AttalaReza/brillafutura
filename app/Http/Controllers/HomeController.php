@@ -96,7 +96,7 @@ class HomeController extends Controller
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        $order_id = 'TIC/' . $user->id . '/' . $purchase_id . '/' . $payment_amount . '/STAGING';
+        $order_id = 'TIC/' . $user->id . '/' . $purchase_id . '/JKL';
 
         // set payment midtrans snap-redirect
         $this->initPaymentGateway();
@@ -190,16 +190,17 @@ class HomeController extends Controller
         date_default_timezone_set('Asia/Jakarta');
         $user = $auth::user();
         $tool = Tool::whereIn('slug', [$slug])->firstOrFail();
-        $price = (int)$tool->price;
+        $status = strtoupper($request->input('status'));
+        if ($status == 'DP') $price = (int)$tool->price / 2;
+        else $price = (int)$tool->price;
         $temp = explode('-', $request->input('end_date'));
         $num = ['Jan' => '01', 'Feb' => '02', 'Mar' => '03', 'Apr' => '04', 'May' => '05', 'Jun' => '06', 'Jul' => '07', 'Aug' => '08', 'Sep' => '09', 'Oct' => '10', 'Nov' => '11', 'Dec' => '12'];
         $end_date = $temp[2] . "-" . $num[$temp[1]] . "-" . $temp[0];
         $start_date = $request->input('start_date');
         $duration = (int)$request->input('duration');
         $location = $request->input('location');
-        $payment_amount = (int)$request->input('duration') * $tool->price;
-        $status = strtoupper($request->input('status'));
-        dd($request->all());
+        $payment_amount = (int)$request->input('duration') * ($price);
+        // dd($payment_amount);
 
         $rental_id = Rental::insertGetId([
             'user_id' => $user->id,
@@ -213,7 +214,7 @@ class HomeController extends Controller
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        $order_id = 'REN/' . $user->id . '/' . $rental_id . '/' . $status . '/STAGING';
+        $order_id = 'REN/' . $user->id . '/' . $rental_id . '/' . $status . '/JKL';
 
         // set payment midtrans snap-redirect
         $this->initPaymentGateway();

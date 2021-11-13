@@ -1029,4 +1029,6 @@
 </div>
 <!--~~./ end contact form block ~~-->
 
+@include('landing.footer')
+
 @endsection

@@ -126,13 +126,13 @@ Start Page Title Area
                                 <div class="d-flex justify-content-end my-2" style="color: #f75e1e;">Tanggal Pesan: {{ $payment->created_time }} {{ $payment->created_day }}, {{ $payment->created }}</div>
                                 <!-- /.entry-title -->
                                 @if ($payment->status === "success" || $payment->status === "settlement")
-                                <form>
+                                <form action="{{ route('invoice.export', ['id' => $payment->id, 'key' => $payment->key ]) }}" target="_blank" method="GET" enctype="multipart/form-data">
                                     <button title="{{ $payment->purchase->code}}" class="btn btn-primary btn-sm btn-block py-1" name="buy" id="buy" type="submit">
                                         Download Bukti Pembayaran
                                     </button>
                                 </form>
                                 @else
-                                <form action="{{ route('landing.event.show', $payment->purchase->event->slug) }}" method="GET" enctype="multipart/form-data">
+                                <form action="{{ $payment->purchase->redirect_url }}" target="_blank" method="POST"GET" enctype="multipart/form-data">
                                     <button class="btn btn-primary btn-sm btn-block py-1" name="buy" id="buy" type="submit">
                                         Beli Ulang
                                     </button>
@@ -192,13 +192,13 @@ Start Page Title Area
                                 <div class="d-flex justify-content-end my-2" style="color: #f75e1e;">Tanggal Pesan: {{ $payment->created_time }} {{ $payment->created_day }}, {{ $payment->created }}</div>
                                 <!-- /.entry-title -->
                                 @if ($payment->status === "success" || $payment->status === "settlement")
-                                <form>
+                                <form action="{{ route('invoice.export', ['id' => $payment->id, 'key' => $payment->key ]) }}" target="_blank" method="GET" enctype="multipart/form-data">
                                     <button title="{{ $payment->rental->status}}" style="text-transform: capitalize;" class="btn btn-primary btn-sm btn-block py-1" name="buy" id="buy" type="submit">
                                         Download Bukti Pembayaran
                                     </button>
                                 </form>
                                 @else
-                                <form action="{{ route('landing.rental.show', $payment->rental->tool->slug) }}" method="GET" enctype="multipart/form-data">
+                                <form action="{{ $payment->rental->redirect_url }}" method="GET" enctype="multipart/form-data">
                                     <button class="btn btn-primary btn-sm btn-block py-1" name="buy" id="buy" type="submit">
                                         Sewa Ulang
                                     </button>
@@ -217,5 +217,7 @@ Start Page Title Area
     </div><!-- /.container -->
 </div>
 <!--~~./ end portfolio block ~~-->
+
+@include('landing.footer')
 
 @endsection

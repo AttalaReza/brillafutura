@@ -435,6 +435,7 @@
 </div>
 <!--~~./ end blog page ~~-->
 
+@include('landing.footer')
 
 @endsection
 

@@ -130,6 +130,8 @@
 </div>
 <!--~~./ end our skill block ~~-->
 
+@include('landing.footer')
+
 @endsection
 
 <script>

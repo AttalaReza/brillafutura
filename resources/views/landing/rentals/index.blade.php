@@ -108,4 +108,6 @@
 </div>
 <!--~~./ end portfolio block ~~-->
 
+@include('landing.footer')
+
 @endsection

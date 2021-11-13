@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InvoicesExport;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+
 use App\Models\User;
 use App\Models\Purchase;
 use App\Models\Rental;
@@ -56,6 +60,7 @@ class UserController extends Controller
         $rentals = [];
         foreach ($payments as $payment) {
             $payment = $this->_setCreated($payment);
+            $payment->key = md5($payment->id);
             if ($payment->code === "ticket") {
                 $payment->purchase->event = $this->_setDay($payment->purchase->event);
                 $payment->purchase->event = $this->_setDate($payment->purchase->event);
@@ -88,14 +93,88 @@ class UserController extends Controller
         $payment = Payment::find($id);
         if ($current_user->id != $payment->user_id) {
             return redirect()
-            ->route('profile.history')
-            ->with('failed', 'Pesanan gagal terhapus.');
+                ->route('profile.history')
+                ->with('failed', 'Pesanan gagal terhapus.');
         }
         $payment->delete();
         return redirect()
             ->route('profile.history')
             ->with('success', 'Pesanan berhasil dihapus.');
     }
+
+    function invoicesExport($id, $key)
+    {
+        $payment = Payment::find($id);
+        $check = md5($payment->id);
+        if ($key == $check) {
+            if ($payment->code === "ticket") {
+                $invoice = $payment->purchase->order_id;
+
+                if ($payment->purchase->ticket === "presale_1") $payment->purchase->ticket = "Presale 1";
+                if ($payment->purchase->ticket === "presale_2") $payment->purchase->ticket = "Presale 2";
+                if ($payment->purchase->ticket === "onsale") $payment->purchase->ticket = "Onsale";
+                $payment->desc = 'Ticket '.$payment->purchase->ticket.' '.$payment->purchase->event->name;
+                $payment->location = $payment->purchase->event->location;
+                $payment->schedule = $this->_setDay($payment->purchase->event)->day.', '.$this->_setDate($payment->purchase->event)->date;
+
+                $payment->qty = $payment->purchase->amount. ' tiket';
+                $payment->price = number_format($payment->purchase->ticket_price);
+                $payment->total = number_format($payment->purchase->payment_amount);
+                $payment->last_total = ($payment->purchase->payment_amount);
+                $payment->payment_status = 'LUNAS';
+            }
+            if ($payment->code === "rental") {
+                $invoice = $payment->rental->order_id;
+
+                $payment->desc = $payment->rental->tool->name;
+                $payment->location = $payment->rental->location;
+                $payment->schedule = $this->_setDay($payment->rental)->day.', '.$this->_setDate($payment->rental)->date;
+
+                $payment->qty = $payment->rental->duration. ' hari';
+                $payment->price = number_format($payment->rental->tool->price);
+                $payment->total = number_format($payment->rental->tool->price * $payment->rental->duration);
+                $payment->last_total = ($payment->rental->tool->price * $payment->rental->duration);
+
+                $payment->payment_status = $payment->rental->status;
+            }
+
+            $data = [
+                'customer' => $payment->user,
+                'no_invoice' => $invoice,
+                'date' => date("d/m/Y", strtotime($payment->created_at)),
+                'payment' => $payment,
+            ];
+            return view('exports.invoice', compact('data'));
+            // view()->share('data',$data);
+            // $pdf = PDF::loadView('exports.invoice', $data);
+
+            // // download PDF file with download method
+            // return $pdf->download('pdf_file.pdf');
+        }
+        abort(404);
+    }
+
+    function invoicesDownload($id, $key)
+    {
+        $payment = Payment::find($id);
+        $check = md5($payment->id);
+        if ($key == $check) {
+            // return Excel::download(new InvoicesExport($id), 'invoice.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+            $data = [
+                'id' => $id,
+                'key' => $key,
+            ];
+            $pdf = app('dompdf.wrapper')->loadView('exports.invoice', compact('data'));
+            return $pdf->download('invoice.pdf');
+            // view()->share('data',$data);
+            // $pdf = PDF::loadView('exports.invoice', $data);
+
+            // // download PDF file with download method
+            // return $pdf->download('pdf_file.pdf');
+        }
+        abort(404);
+    }
+
 
     private function _setCreated($data)
     {
