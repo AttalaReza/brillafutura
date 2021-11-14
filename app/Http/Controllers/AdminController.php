@@ -84,6 +84,7 @@ class AdminController extends Controller
             $payment->time = date("G:i", strtotime($payment->created_at));
             $payment->ticket_price = number_format($payment->purchase->ticket_price);
             $payment->payment_amount = number_format($payment->purchase->payment_amount);
+            $payment->key = md5('invoice-'.$payment->id.'-brilla-futura');
 
             if ($payment->purchase->ticket == 'Presale 1') {
                 $details['presale_1'] = $details['presale_1'] + $payment->purchase->payment_amount;

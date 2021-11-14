@@ -123,7 +123,7 @@
                                         <button title="Ubah ke Lunas" type="submit" class="btn btn-warning btn-sm" onclick="return confirm('Apakah Anda yakin ingin mengubah status penyewaan menjadi LUNAS?')">Ubah ke Lunas?</button>
                                     </form>
                                     @endif
-                                    <a title="Download" class="btn btn-primary btn-sm mt-1" type="button" href="{{ route('invoice.export', ['id' => $payment->id, 'key' => $payment->key ]) }}"><i class="fas fa-download mr-1"></i> Invoice</a>
+                                    <a title="Invoice" class="btn btn-primary btn-sm mt-1" type="button" href="{{ route('invoice.export', ['id' => $payment->id, 'key' => $payment->key ]) }}"><i class="fas fa-download mr-1"></i> Invoice</a>
                                 </td>
                             </tr>
                             @endforeach

@@ -119,6 +119,7 @@ class UserController extends Controller
                 $payment->last_total = ($payment->purchase->payment_amount);
                 $payment->code = $payment->purchase->code;
                 $payment->payment_status = 'LUNAS';
+                $payment->tnc = 'Silakan tukarkan Kode Tiket Anda pada tempat dan waktu Event akan berlangsung.';
             }
             if ($payment->code === "rental") {
                 $payment->desc = $payment->rental->tool->name;
@@ -131,6 +132,7 @@ class UserController extends Controller
                 $payment->last_total = ($payment->rental->tool->price * $payment->rental->duration);
                 $payment->code = '';
                 $payment->payment_status = $payment->rental->status;
+                $payment->tnc = '';
             }
 
             $data = [

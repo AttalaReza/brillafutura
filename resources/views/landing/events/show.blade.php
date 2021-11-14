@@ -112,7 +112,9 @@
                                 </p>
                                 <br />
                                 <h4>Syarat dan Ketentuan</h4>
-                                <p>Setelah menyelesaikan pembelian di situs web dan outlet kami, Anda akan menerima E-voucher dari Brilla Futura yang langsung dikirim ke e-mail Anda.
+                                <p>
+                                    Setelah menyelesaikan pembelian di situs web dan outlet kami, Anda akan mendapatkan Kode Tiket di dalam E-voucher dari Brilla Futura pada halaman profile Anda.
+                                    Anda dapat menukarkan Kode Tiket Anda pada waktu dan tempat Event akan berlangsung.
                                 <p>
                             </div>
                             <!-- /.entry-content -->

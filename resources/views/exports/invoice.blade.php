@@ -67,12 +67,16 @@
                 </div>
             </div>
         </div>
-        <div id="footer" style="margin-top: 2rem; display: flex;">
-            <div>
+        <div id="footer" style="margin-top: 2rem; display: flex; justify-content: space-between;">
+            <div style="width: 50%">
                 <b style="margin-bottom: 0.5rem;">Pembayaran telah dilakukan melalui:</b>
                 <div>Midtrans.com</div>
+                @if ($data['payment']->tnc != '')
+                <br />
+                <div>{{ $data['payment']->tnc }}</div>
+                @endif
             </div>
-            <div style="margin-left: auto;">www.brilla-futura.com</div>
+            <div style="width: 30%; display: flex; justify-content: end; align-items: end">www.brilla-futura.com</div>
         </div>
     </div>
 </div>

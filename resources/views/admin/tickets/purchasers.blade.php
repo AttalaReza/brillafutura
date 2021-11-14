@@ -122,8 +122,9 @@
                                 <td>{{ $payment->ticket_price }}</td>
                                 <td>{{ $payment->purchase->amount }} tiket</td>
                                 <td><b>{{ $payment->payment_amount }}</b></td>
-                                <td class="text-center">
-                                    <a title="Ticket Code" class="btn btn-primary btn-sm">{{ $payment->purchase->code }}</a>
+                                <td class="text-center" width="200">
+                                    <a title="Ticket Code" class="btn btn-success btn-sm">{{ $payment->purchase->code }}</a>
+                                    <a title="Invoice" class="btn btn-primary btn-sm mt-1" type="button" href="{{ route('invoice.export', ['id' => $payment->id, 'key' => $payment->key ]) }}"><i class="fas fa-download mr-1"></i> Invoice</a>
                                 </td>
                             </tr>
                             @endforeach
