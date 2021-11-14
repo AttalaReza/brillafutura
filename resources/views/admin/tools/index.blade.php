@@ -37,6 +37,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Nama</th>
                                 <th>Deskripsi</th>
                                 <th>Harga</th>
@@ -46,6 +47,7 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>#</th>
                                 <th>Nama</th>
                                 <th>Deskripsi</th>
                                 <th>Harga</th>
@@ -56,6 +58,7 @@
                         <tbody>
                             @foreach ($data['tools'] as $tool)
                             <tr>
+                                <th>{{ $tool->id }}</th>
                                 <td>
                                     {{ $tool->name }} <br />
                                     <img class="mt-2" src="{{ asset('/storage/images/tools/'.$tool->file_image) }}" alt="{{ $tool->file_image }}" width="120" />

@@ -65,6 +65,7 @@ class AdminController extends Controller
         }
         $payments = Payment::whereIn('purchase_id', $purchase_id)
             ->whereIn('status', ['success', 'settlement'])
+            ->where('code', 'ticket')
             ->orderBy('created_at', 'DESC')
             ->get();
         $details = [
@@ -137,6 +138,7 @@ class AdminController extends Controller
         }
         $payments = Payment::whereIn('rental_id', $rental_id)
             ->whereIn('status', ['success', 'settlement'])
+            ->where('code', 'rental')
             ->orderBy('created_at', 'DESC')
             ->get();
         foreach ($payments as $payment) {
@@ -195,12 +197,12 @@ class AdminController extends Controller
     {
         if ($data->end_date) {
             if ($data->start_date === $data->end_date) {
-                $data->date = date("j M Y", strtotime($data->start_date));
+                $data->date = date("Y m j (M)", strtotime($data->start_date));
             } else {
-                $data->date = date("j", strtotime($data->start_date)) . "-" . date("j M Y", strtotime($data->end_date));
+                $data->date = date("Y m j", strtotime($data->start_date)) . "-" . date("j (M)", strtotime($data->end_date));
             }
         } else {
-            $data->date = date("j M Y", strtotime($data->start_date));
+            $data->date = date("Y m j (M)", strtotime($data->start_date));
         }
         return $data;
     }

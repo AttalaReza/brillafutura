@@ -37,6 +37,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Event</th>
                                 <th>Deskripsi</th>
                                 <th>Tiket</th>
@@ -46,6 +47,7 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>#</th>
                                 <th>Event</th>
                                 <th>Deskripsi</th>
                                 <th>Tiket</th>
@@ -56,6 +58,7 @@
                         <tbody>
                             @foreach ($data['events'] as $event)
                             <tr>
+                                <th>{{ $event->id }}</th>
                                 <td>
                                     {{ $event->name }}<br />
                                     <img class="mt-2" src="{{ asset('/storage/images/events/'.$event->file_image) }}" alt="{{ $event->file_image }}" width="200" />
