@@ -129,7 +129,7 @@ Start Page Title Area
                                 @if ($payment->status === "success" || $payment->status === "settlement")
                                 <form action="{{ route('invoice.export', ['id' => $payment->id, 'key' => $payment->key ]) }}" target="_blank" method="GET" enctype="multipart/form-data">
                                     <button title="{{ $payment->purchase->code}}" class="btn btn-primary btn-sm btn-block py-1" name="buy" id="buy" type="submit">
-                                        Download Bukti Pembayaran
+                                        Lihat Invoice Pembayaran
                                     </button>
                                 </form>
                                 @else
@@ -193,7 +193,7 @@ Start Page Title Area
                                 @if ($payment->status === "success" || $payment->status === "settlement")
                                 <form action="{{ route('invoice.export', ['id' => $payment->id, 'key' => $payment->key ]) }}" target="_blank" method="GET" enctype="multipart/form-data">
                                     <button title="{{ $payment->rental->status}}" style="text-transform: capitalize;" class="btn btn-primary btn-sm btn-block py-1" name="buy" id="buy" type="submit">
-                                        Download Bukti Pembayaran
+                                        Lihat Invoice Pembayaran
                                     </button>
                                 </form>
                                 @else
