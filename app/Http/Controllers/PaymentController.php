@@ -75,17 +75,30 @@ class PaymentController extends Controller
         $user_id = $temp[1];
         $purchase_id = $temp[2];
 
-        $payment_params = [
+        $payment_id = Payment::insertGetId([
             'user_id' => $user_id,
             'purchase_id' => $purchase_id,
             'code' => 'ticket',
             'type' => $type,
-            'status' => $payment_status
-        ];
-        Payment::create($payment_params);
+            'status' => $payment_status,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
 
         // update data di table purchase
         if ($payment_status == 'success' || $payment_status == 'settlement') {
+            $invoice = 'TIC/'.$user_id.'/'.$payment_id.'/'.$purchase->event->id.'/'.date('Y');
+            Payment::where('purchase_id', $purchase_id)->update([
+                'invoice' => $invoice,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+            Payment::where('purchase_id', $purchase_id)
+                ->whereIn('status', ['denied', 'failed', 'pending', 'expire'])
+                ->update([
+                'code' => 'deleted',
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
             $initial_event = strtoupper(substr($purchase->event->name, 0, 1) . substr($purchase->event->name, 1, 1) . substr($purchase->event->name, 2, 1));
             $ticket_info = '';
             if ($purchase->ticket == 'Presale 1') $ticket_info = 'P1' . $purchase->amount;
@@ -150,17 +163,30 @@ class PaymentController extends Controller
         $rental_id = $temp[2];
         $rental_status = strtolower($temp[3]);
 
-        $payment_params = [
+        $payment_id = Payment::insertGetId([
             'user_id' => $user_id,
             'rental_id' => $rental_id,
             'code' => 'rental',
             'type' => $type,
-            'status' => $payment_status
-        ];
-        Payment::create($payment_params);
+            'status' => $payment_status,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
 
         // update data di table rental
         if ($payment_status == 'success' || $payment_status == 'settlement') {
+            $invoice = 'REN/'.$user_id.'/'.$payment_id.'/'.$rental->tool->id.'/'.date('Y');
+            Payment::where('rental_id', $rental_id)->update([
+                'invoice' => $invoice,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+            Payment::where('rental_id', $rental_id)
+                ->whereIn('status', ['denied', 'failed', 'pending', 'expire'])
+                ->update([
+                'code' => 'deleted',
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
             Rental::where('id', $rental_id)->update([
                 'status' => $rental_status,
                 'updated_at' => date('Y-m-d H:i:s')

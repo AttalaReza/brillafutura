@@ -53,7 +53,7 @@
                                     <div class="post-thumb-area">
                                         <figure class="post-thumb">
                                             <a href="{{ route('landing.event.show', $event->slug) }}">
-                                                <img src="{{ asset('/storage/images/events/'.$event->file_image) }}" alt="{{ $event->file_image }}" style="object-fit: cover; height: 500px; width: 100%;"/>
+                                                <img src="{{ asset('/storage/images/events/'.$event->file_image) }}" alt="{{ $event->file_image }}" />
                                             </a>
                                         </figure>
                                         <!-- /.post-thumb -->

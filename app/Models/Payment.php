@@ -14,6 +14,7 @@ class Payment extends Model
         'purchase_id',
         'rental_id',
         'code',
+        'invoice',
         'type',
         'status',
     ];

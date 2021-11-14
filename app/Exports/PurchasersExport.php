@@ -22,7 +22,7 @@ class PurchasersExport implements FromView, ShouldAutoSize
         foreach ($event->purchase as $p) {
             array_push($purchase_id, $p->id);
         }
-        $payments = Payment::whereIn('purchase_id', $purchase_id)
+        $items = Payment::whereIn('purchase_id', $purchase_id)
             ->whereIn('status', ['success', 'settlement'])
             ->orderBy('created_at', 'DESC')
             ->get();
@@ -37,11 +37,7 @@ class PurchasersExport implements FromView, ShouldAutoSize
             'presale_2_remaining' => $event->presale_2_quota,
             'onsale_remaining' => $event->onsale_quota,
         ];
-        $item = [];
-        foreach ($payments as $p) {
-            array_push($item, $p, $p, $p);
-        }
-        foreach ($item as $i) {
+        foreach ($items as $i) {
             if ($i->purchase->ticket == 'presale_1') {
                 $details['presale_1'] = $details['presale_1'] + $i->purchase->payment_amount;
                 $details['presale_1_sold'] = $details['presale_1_sold'] + $i->purchase->amount;

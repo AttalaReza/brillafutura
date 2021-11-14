@@ -19,6 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('purchase_id')->nullable();
             $table->integer('rental_id')->nullable();
             $table->string('code')->nullable();
+            $table->string('invoice')->nullable();
             $table->string('type')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();

@@ -79,13 +79,14 @@ Start Page Title Area
         <div class="row d-flex flex-wrap justify-content-start">
             <div class="col-lg-12">
                 <div class="row portfolio-grid">
+                    @if ($data['purchases'] != [] && $data['rentals'] != [])
                     @foreach ($data['purchases'] as $payment)
                     <div class="item col-lg-4 col-md-6 ticket">
                         <article class="post post-grid service-item" style="padding: 0; margin: 0 0 16px 0; cursor: pointer;" href="{{ route('landing.event.show', $payment->purchase->event->slug) }}">
                             <div class="post-thumb-area">
                                 <figure class="post-thumb">
                                     <a href="{{ route('landing.event.show', $payment->purchase->event->slug) }}">
-                                        <img src="{{ asset('/storage/images/events/'.$payment->purchase->event->file_image) }}" alt="{ $payment->purchase->event->file_image }}" style="object-fit: cover; height: 500px; width: 100%;" />
+                                        <img src="{{ asset('/storage/images/events/'.$payment->purchase->event->file_image) }}" alt="{{ $payment->purchase->event->file_image }}" />
                                     </a>
                                 </figure>
                                 <!-- /.post-thumb -->
@@ -123,7 +124,7 @@ Start Page Title Area
                                         @endif
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-end my-2" style="color: #f75e1e;">Tanggal Pesan: {{ $payment->created_time }} {{ $payment->created_day }}, {{ $payment->created }}</div>
+                                <div class="d-flex justify-content-end my-2" style="color: #000000;">Tanggal Pesan: {{ $payment->created_time }} {{ $payment->created_day }}, {{ $payment->created }}</div>
                                 <!-- /.entry-title -->
                                 @if ($payment->status === "success" || $payment->status === "settlement")
                                 <form action="{{ route('invoice.export', ['id' => $payment->id, 'key' => $payment->key ]) }}" target="_blank" method="GET" enctype="multipart/form-data">
@@ -132,11 +133,9 @@ Start Page Title Area
                                     </button>
                                 </form>
                                 @else
-                                <form action="{{ $payment->purchase->redirect_url }}" target="_blank" method="POST"GET" enctype="multipart/form-data">
-                                    <button class="btn btn-primary btn-sm btn-block py-1" name="buy" id="buy" type="submit">
-                                        Beli Ulang
-                                    </button>
-                                </form>
+                                <a href="{{ ($payment->purchase->redirect_url) }}" class="btn btn-primary btn-sm btn-block py-1" name="buy" id="buy" type="submit">
+                                    Beli Ulang
+                                </a>
                                 @endif
                                 <!-- /.entry-meta -->
                             </div>
@@ -151,7 +150,7 @@ Start Page Title Area
                             <div class="post-thumb-area">
                                 <figure class="post-thumb">
                                     <a href="{{ route('landing.rental.show', $payment->rental->tool->slug) }}">
-                                        <img src="{{ asset('/storage/images/tools/'.$payment->rental->tool->file_image) }}" alt="{ $payment->rental->tool->file_image }}" style="object-fit: cover; height: 500px; width: 100%;" />
+                                        <img src="{{ asset('/storage/images/tools/'.$payment->rental->tool->file_image) }}" alt="{{ $payment->rental->tool->file_image }}" />
                                     </a>
                                 </figure>
                                 <!-- /.post-thumb -->
@@ -189,7 +188,7 @@ Start Page Title Area
                                         @endif
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-end my-2" style="color: #f75e1e;">Tanggal Pesan: {{ $payment->created_time }} {{ $payment->created_day }}, {{ $payment->created }}</div>
+                                <div class="d-flex justify-content-end my-2" style="color: #000000;">Tanggal Pesan: {{ $payment->created_time }} {{ $payment->created_day }}, {{ $payment->created }}</div>
                                 <!-- /.entry-title -->
                                 @if ($payment->status === "success" || $payment->status === "settlement")
                                 <form action="{{ route('invoice.export', ['id' => $payment->id, 'key' => $payment->key ]) }}" target="_blank" method="GET" enctype="multipart/form-data">
@@ -198,7 +197,7 @@ Start Page Title Area
                                     </button>
                                 </form>
                                 @else
-                                <form action="{{ $payment->rental->redirect_url }}" method="GET" enctype="multipart/form-data">
+                                <form action="{{ redirect($payment->rental->redirect_url) }}" method="GET" enctype="multipart/form-data">
                                     <button class="btn btn-primary btn-sm btn-block py-1" name="buy" id="buy" type="submit">
                                         Sewa Ulang
                                     </button>
@@ -211,6 +210,9 @@ Start Page Title Area
                         <!-- /.post -->
                     </div>
                     @endforeach
+                    @else
+                    <h4 class="w-100 d-flex justify-content-center" style="color: #BDBDBD">Anda belum memiliki riwayat pembelian tiket atau penyewaan alat</h4>
+                    @endif
                 </div>
             </div>
         </div>

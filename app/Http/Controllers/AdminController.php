@@ -140,6 +140,7 @@ class AdminController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
         foreach ($payments as $payment) {
+            $payment->key = md5('invoice-'.$payment->id.'-brilla-futura');
             $payment->date = date("Y-m-d, H:i", strtotime($payment->created_at));
             $payment->tool_cost = number_format($payment->rental->tool->price);
             $payment->rental = $this->_setDate($payment->rental);

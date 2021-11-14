@@ -15,9 +15,10 @@
                 <div class="customer-name">{{ $data['customer']->name }}</div>
                 <div class="m-0">{{ $data['customer']->phone }}</div>
                 <div class="m-0">{{ $data['customer']->email }}</div>
+                <div class="m-0">{{ $data['customer']->address }}</div>
             </div>
             <div>
-                <div class="info-right" style="background: #BDBDBD; font-weight: bold; border-radius: 5px;">
+                <div class="info-right" style="background: #89B5AF; font-weight: bold; border-radius: 5px;">
                     <div>Invoice No.</div>
                     <div>Tanggal</div>
                 </div>
@@ -27,14 +28,14 @@
                 </div>
             </div>
         </div>
-        <div id="details" style="margin-top: 2rem; width: 100%; border-left: 3px solid #BDBDBD; border-right: 5px solid #BDBDBD; border-radius: 5px; padding: 1rem 2rem;">
-            <div style="display: flex; border-radius: 5px; background: #4F4F4F; padding-left: 2rem; font-weight: bold; color: #FFF;">
+        <div id="details" style="margin-top: 2rem; width: 100%; border-radius: 5px; padding: 1rem 0rem;">
+            <div style="display: flex; border-radius: 5px; background: #89B5AF; padding-left: 2rem; font-weight: bold;">
                 <div class="details-desc">Deskripsi</div>
                 <div class="details-info">Kuantitas</div>
                 <div class="details-info">Harga</div>
                 <div class="details-info">Total</div>
             </div>
-            <div style="display: flex; padding-left: 2rem; border-bottom: 1px solid #BDBDBD; margin-top: 1rem;">
+            <div style="display: flex; padding-left: 2rem; border-bottom: 2px solid #BDBDBD; margin-top: 0.5rem;">
                 <div class="details-desc" style="padding: 0.5rem 0">
                     {{ $data['payment']->desc }} <br />
                     Lokasi: {{ $data['payment']->location }} <br />
@@ -44,9 +45,14 @@
                 <div class="details-info">{{ $data['payment']->price }}</div>
                 <div class="details-info"><b>{{ $data['payment']->total }}</b></div>
             </div>
-            <div style="display: flex; margin-top: 3rem; border-top: 1px solid #BDBDBD; padding-top: 1rem;">
+            <div style="height: 4rem; display: flex; align-items: center; justify-content: center">
+                @if ($data['payment']->code != '')
+                <div style="border-radius: 5px; border: 2px solid #BDBDBD; padding: 0.5rem 3rem; display: flex; align-items: center; justify-content: center"><b>KODE TIKET : {{ $data['payment']->code }}</b></div>
+                @endif
+            </div>
+            <div style="display: flex; border-top: 2px solid #BDBDBD; padding-top: 1rem;">
                 <div style="display: flex; align-items: center; text-transform: uppercase; font-size: 1rem"><b>{{ $data['payment']->payment_status }}</b></div>
-                <div style="border-radius: 5px; margin-left: auto; background: #4F4F4F; padding: 0.5rem 0; color: #FFF; width: 50%">
+                <div style="border-radius: 5px; margin-left: auto; background: #89B5AF; padding: 0.5rem 0; width: 50%">
                     <div style="display: flex;">
                         <div style="display: flex; align-items: start; justify-content: start; width: 50%; padding-left: 1rem;"><b>Total </b></div>
                         <div style="display: flex; align-items: start; justify-content: start; width: 50%; padding-left: 1rem;"><b>Rp {{ $data['payment']->total }}</b></div>

@@ -60,7 +60,7 @@ class UserController extends Controller
         $rentals = [];
         foreach ($payments as $payment) {
             $payment = $this->_setCreated($payment);
-            $payment->key = md5($payment->id);
+            $payment->key = md5('invoice-'.$payment->id.'-brilla-futura');
             if ($payment->code === "ticket") {
                 $payment->purchase->event = $this->_setDay($payment->purchase->event);
                 $payment->purchase->event = $this->_setDate($payment->purchase->event);
@@ -90,13 +90,10 @@ class UserController extends Controller
     public function deleteHistory(Auth $auth, $id)
     {
         $current_user = $auth::user();
-        $payment = Payment::find($id);
-        if ($current_user->id != $payment->user_id) {
-            return redirect()
-                ->route('profile.history')
-                ->with('failed', 'Pesanan gagal terhapus.');
-        }
-        $payment->delete();
+        $payment = Payment::where('id', $id)->update([
+            'code' => 'deleted',
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
         return redirect()
             ->route('profile.history')
             ->with('success', 'Pesanan berhasil dihapus.');
@@ -105,11 +102,10 @@ class UserController extends Controller
     function invoicesExport($id, $key)
     {
         $payment = Payment::find($id);
-        $check = md5($payment->id);
+        $check = md5('invoice-'.$payment->id.'-brilla-futura');
         if ($key == $check) {
+            $invoice = $payment->invoice;
             if ($payment->code === "ticket") {
-                $invoice = $payment->purchase->order_id;
-
                 if ($payment->purchase->ticket === "presale_1") $payment->purchase->ticket = "Presale 1";
                 if ($payment->purchase->ticket === "presale_2") $payment->purchase->ticket = "Presale 2";
                 if ($payment->purchase->ticket === "onsale") $payment->purchase->ticket = "Onsale";
@@ -121,11 +117,10 @@ class UserController extends Controller
                 $payment->price = number_format($payment->purchase->ticket_price);
                 $payment->total = number_format($payment->purchase->payment_amount);
                 $payment->last_total = ($payment->purchase->payment_amount);
+                $payment->code = $payment->purchase->code;
                 $payment->payment_status = 'LUNAS';
             }
             if ($payment->code === "rental") {
-                $invoice = $payment->rental->order_id;
-
                 $payment->desc = $payment->rental->tool->name;
                 $payment->location = $payment->rental->location;
                 $payment->schedule = $this->_setDay($payment->rental)->day.', '.$this->_setDate($payment->rental)->date;
@@ -134,7 +129,7 @@ class UserController extends Controller
                 $payment->price = number_format($payment->rental->tool->price);
                 $payment->total = number_format($payment->rental->tool->price * $payment->rental->duration);
                 $payment->last_total = ($payment->rental->tool->price * $payment->rental->duration);
-
+                $payment->code = '';
                 $payment->payment_status = $payment->rental->status;
             }
 
@@ -144,6 +139,7 @@ class UserController extends Controller
                 'date' => date("d/m/Y", strtotime($payment->created_at)),
                 'payment' => $payment,
             ];
+            // dd($data);
             return view('exports.invoice', compact('data'));
             // view()->share('data',$data);
             // $pdf = PDF::loadView('exports.invoice', $data);
@@ -157,7 +153,7 @@ class UserController extends Controller
     function invoicesDownload($id, $key)
     {
         $payment = Payment::find($id);
-        $check = md5($payment->id);
+        $check = md5('invoice-'.$payment->id.'-brilla-futura');
         if ($key == $check) {
             // return Excel::download(new InvoicesExport($id), 'invoice.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
             $data = [
