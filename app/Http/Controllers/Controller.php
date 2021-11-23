@@ -12,7 +12,7 @@ class Controller extends BaseController
     protected function initPaymentGateway()
     {
         // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        \Midtrans\Config::$serverKey = "SB-Mid-server-cDaJr8ETuVPKECtXaHLGG-x2";
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
         \Midtrans\Config::$isProduction = false;
         // Set sanitization on (default)
