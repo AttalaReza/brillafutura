@@ -56,7 +56,7 @@ class PurchasersExport implements FromView, ShouldAutoSize
         }
         $data = [
             'event' => $event,
-            'payments' => $item,
+            'payments' => $items,
             'details' => $details,
         ];
         return view('exports.purchasers', [
