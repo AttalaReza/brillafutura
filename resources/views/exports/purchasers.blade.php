@@ -61,6 +61,7 @@
         <td></td>
     </tr>
     <tr>
+        <th><b>No Invoice</b></th>
         <th><b>Waktu Beli</b></th>
         <th><b>Pembeli</b></th>
         <th><b>Kategori</b></th>

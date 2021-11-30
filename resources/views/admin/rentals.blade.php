@@ -28,7 +28,7 @@
             <div class="card-body">
                 <form action="{{ route('rentals.export') }}" method="POST">
                     @csrf
-                    <label>Download data Excel, Silakan pilih bulan dan tahun</label>
+                    <label>Rekap Data, Silakan pilih bulan dan tahun</label>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-5">
@@ -63,7 +63,7 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <button type="submit" title="Download Excel Data Penyewa" class="btn btn-success btn-block" href=><i class="fas fa-download mr-1"></i> Excel</button>
+                                <button type="submit" title="Download Excel Data Penyewa" class="btn btn-success btn-block" href=><i class="fas fa-download mr-1"></i> Rekap</button>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Tanggal Bayar</th>
+                                <th>No Invoice</th>
                                 <th>Penyewa</th>
                                 <th>Alat</th>
                                 <th>Tanggal Sewa</th>
@@ -90,7 +90,7 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Tanggal Bayar</th>
+                                <th>No Invoice</th>
                                 <th>Penyewa</th>
                                 <th>Paket</th>
                                 <th>Tanggal Sewa</th>
@@ -102,16 +102,17 @@
                         <tbody>
                             @foreach ($data['payments'] as $payment)
                             <tr>
-                                <td>{{ $payment->date }} <br /><br />{{ $payment->type }}</td>
+                                <td>{{ $payment->invoice }} <br /><br /> {{ $payment->date }} </td>
                                 <td>{{ $payment->rental->user->name }} <br /><br />{{ $payment->rental->user->phone }}</td>
                                 <td>{{ $payment->rental->tool->name }} <br /><br />Rp {{ $payment->tool_cost }}</td>
-                                <td>{{ $payment->rental->date }}</td>
+                                <td>{{ $payment->rental->date }} </td>
                                 <td>{{ $payment->rental->location }}</td>
                                 <td>
                                     <b>Rp {{ $payment->payment_amount }}</b>
                                     @if ($payment->rental->status == "dp")
                                     <br /><br />Sudah DP: <br />Rp {{ $payment->payment_paid }}
                                     @endif
+                                    <br /><br />{{ $payment->type }}
                                 </td>
                                 <td class="text-center">
                                     @if ($payment->rental->status == "lunas")

@@ -60,7 +60,7 @@ Start Site Header
                                                                         <li><a href="{{ route('admin') }}">Dashboard Admin</a></li>
                                                                         @else
                                                                         <li><a href="{{ route('profile.index') }}">Profile</a></li>
-                                                                        <li><a href="{{ route('profile.history') }}">Riwayat Pembelian Tiket<br />dan Penyewaan Alat</a></li>
+                                                                        <li><a href="{{ route('profile.history') }}">Riwayat Pemesanan</a></li>
                                                                         @endif
                                                                         <li>
                                                                             <form action="{{ route('logout') }}" method="POST">
