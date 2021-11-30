@@ -55,7 +55,7 @@ class UserController extends Controller
     public function showHistory(Auth $auth)
     {
         $user = $auth::user();
-        $payments = Payment::where('user_id', $user->id)->orderBy('updated_at', 'DESC')->get();
+        $payments = Payment::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
         $purchases = [];
         $rentals = [];
         foreach ($payments as $payment) {

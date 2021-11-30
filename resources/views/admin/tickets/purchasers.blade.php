@@ -29,7 +29,7 @@
         </div>
         @endif
         <div class="card mb-4">
-            <a title="Download Excel Data Pembeli" class="btn btn-success" href="{{ route('purchasers.export', ['id' => $data['event']->id, 'key' => $data['key'] ]) }}"><i class="fas fa-download mr-1"></i> Excel</a>
+            <a title="Download Excel Data Pembeli" class="btn btn-success" href="{{ route('purchasers.export', ['id' => $data['event']->id, 'key' => $data['key'] ]) }}"><i class="fas fa-download mr-1"></i> Rekap</a>
         </div>
         <div class="card mb-4">
             <div class="card-header">
@@ -93,7 +93,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Waktu Beli</th>
+                                <th>No Invoice</th>
                                 <th>Pembeli</th>
                                 <th>Kategori</th>
                                 <th>Harga Tiket</th>
@@ -104,7 +104,7 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Waktu Beli</th>
+                                <th>No Invoice</th>
                                 <th>Pembeli</th>
                                 <th>Kategori</th>
                                 <th>Harga Tiket</th>
@@ -116,7 +116,7 @@
                         <tbody>
                             @foreach ($data['payments'] as $payment)
                             <tr>
-                                <td>{{ $payment->date }}<br />{{ $payment->time }}</td>
+                                <td>{{ $payment->invoice }}<br /><br />{{ $payment->date }}, {{ $payment->time }}</td>
                                 <td>{{ $payment->user->name }}</td>
                                 <td>{{ $payment->purchase->ticket }}</td>
                                 <td>{{ $payment->ticket_price }}</td>

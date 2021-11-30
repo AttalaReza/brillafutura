@@ -4,7 +4,7 @@
 
 @section('content')
 <div style="margin-left: auto; margin-right: auto; display: flex; justify-content: center;">
-    <div class="invoice-box">
+    <div class="invoice-box" type="text/css" media="print">
         <div id="title" style="display: flex; align-items: center; justify-content: space-between;">
             <img src="{{ asset('logo-block.png') }}" width="125" alt="Site Logo" />
             <div class="title">INVOICE</div>
@@ -78,6 +78,7 @@
             </div>
             <div style="width: 30%; display: flex; justify-content: end; align-items: end">www.brilla-futura.com</div>
         </div>
+        <a id="donwload-button" class="mt-4 btn btn-primary btn-block" onclick="document.getElementById('donwload-button').style.opacity = 0; window.print();return document.getElementById('donwload-button').style.opacity = 1;">Cetak</a>
     </div>
 </div>
 
