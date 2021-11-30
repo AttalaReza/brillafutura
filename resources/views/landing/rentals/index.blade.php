@@ -70,7 +70,7 @@
                             <div class="post-thumb-area">
                                 <figure class="post-thumb">
                                     <a href="{{ route('landing.rental.show', $tool->slug) }}">
-                                        <img src="{{ asset('/storage/images/tools/'.$tool->file_image) }}" alt="{ $tool->file_image }}"/>
+                                        <img src="{{ asset('/uploads/'.$tool->file_image) }}" alt="{ $tool->file_image }}"/>
                                     </a>
                                 </figure>
                                 <!-- /.post-thumb -->

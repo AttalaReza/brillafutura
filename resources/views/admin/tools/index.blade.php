@@ -61,7 +61,7 @@
                                 <th>{{ $tool->id }}</th>
                                 <td>
                                     {{ $tool->name }} <br />
-                                    <img class="mt-2" src="{{ asset('/storage/images/tools/'.$tool->file_image) }}" alt="{{ $tool->file_image }}" width="120" />
+                                    <img class="mt-2" src="{{ asset('/uploads/'.$tool->file_image) }}" alt="{{ $tool->file_image }}" width="120" />
                                 </td>
                                 <td>
                                     @foreach($tool->description as $desc)

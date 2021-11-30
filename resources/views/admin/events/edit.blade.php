@@ -142,7 +142,7 @@
                         <div class="form-row">
                             <div class="col-8">
                                 <div class="text-center">
-                                    <img src="{{ asset('/storage/images/events/'.$data['event']->file_image) }}" alt="{{ $data['event']->file_image }}" width="500" />
+                                    <img src="{{ asset('/uploads/'.$data['event']->file_image) }}" alt="{{ $data['event']->file_image }}" width="500" />
                                 </div>
                             </div>
                             <div class="col-4">

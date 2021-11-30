@@ -108,7 +108,7 @@ class EventController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $event->delete();
-        Storage::disk('local')->delete('public/images/events/' . $event->file_image);
+        Storage::disk('public')->delete($event->file_image);
         return redirect()
             ->route('events.index')
             ->with('success', $event->name . ' event were successfully removed');
@@ -122,10 +122,10 @@ class EventController extends Controller
         $file = $request->file('file');
         $size = $file->getSize();
         $extension = $file->getClientOriginalExtension();
-        $file_name = time() . '-' . Str::slug($name, '-') . '.' . $extension;
+        $file_name = 'event-' . Str::slug($name, '-') . '.' . $extension;
         if ($extension == "png" || $extension == "jpg" || $extension == "jpeg") {
             if ($size <= 2048000) {
-                $file->storeAs('images/events', $file_name, 'public');
+                Storage::disk('public')->put($file_name, $file);
             } else {
                 return redirect()
                     ->route('events.index')

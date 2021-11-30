@@ -50,7 +50,7 @@
                         <div class="form-row">
                             <div class="col-8">
                                 <div class="text-center">
-                                    <img src="{{ asset('/storage/images/tools/'.$data['tool']->file_image) }}" alt="{{ $data['tool']->file_image }}" width="500" />
+                                    <img src="{{ asset('/uploads/'.$data['tool']->file_image) }}" alt="{{ $data['tool']->file_image }}" width="500" />
                                 </div>
                             </div>
                             <div class="col-4">

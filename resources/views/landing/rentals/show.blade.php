@@ -49,7 +49,7 @@
             <div class="col-lg-5 col-md-6">
                 <div class="our-content-area">
                     <div class="single-thumb post-thumb">
-                        <img class="w-100 h-100" src="{{ asset('/storage/images/tools/'.$data['tool']->file_image) }}" alt="{ $tool->file_image }}" />
+                        <img class="w-100 h-100" src="{{ asset('/uploads/'.$data['tool']->file_image) }}" alt="{ $tool->file_image }}" />
                     </div>
 
                 </div>

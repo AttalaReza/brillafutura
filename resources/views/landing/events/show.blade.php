@@ -53,8 +53,8 @@
                     <article class="post">
                         <div class="post-thumb-area">
                             <figure class="post-thumb">
-                                <a href="{{ asset('/storage/images/events/'.$data['event']->file_image) }}" target="_blank">
-                                    <img src="{{ asset('/storage/images/events/'.$data['event']->file_image) }}" alt="{{ $data['event']->file_image }}" width="100%" />
+                                <a href="{{ asset('/uploads/'.$data['event']->file_image) }}" target="_blank">
+                                    <img src="{{ asset('/uploads/'.$data['event']->file_image) }}" alt="{{ $data['event']->file_image }}" width="100%" />
                                 </a>
                             </figure>
                             <!-- /.post-thumb -->

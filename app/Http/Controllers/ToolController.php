@@ -107,7 +107,7 @@ class ToolController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $tool->delete();
-        Storage::disk('local')->delete('public/images/tools/' . $tool->file_image);
+        Storage::disk('public')->delete($tool->file_image);
         return redirect()
             ->route('tools.index')
             ->with('success', $tool->name . ' were successfully removed');
@@ -121,10 +121,10 @@ class ToolController extends Controller
         $file = $request->file('file');
         $size = $file->getSize();
         $extension = $file->getClientOriginalExtension();
-        $file_name = time() . '-' . Str::slug($name, '-') . '.' . $extension;
+        $file_name = 'tool-'.Str::slug($name, '-') . '.' . $extension;
         if ($extension == "png" || $extension == "jpg" || $extension == "jpeg") {
             if ($size <= 2048000) {
-                $file->storeAs('images/tools', $file_name, 'public');
+                Storage::disk('public')->put($file_name, file_get_contents($file));
             } else {
                 return redirect()
                     ->route('tools.index')

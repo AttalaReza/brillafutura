@@ -80,7 +80,7 @@ class AdminController extends Controller
             'onsale_remaining' => $event->onsale_ticket,
         ];
         foreach ($payments as $payment) {
-            $payment->date = date("Y/m/d", strtotime($payment->created_at));
+            $payment->date = date("Y-m-d", strtotime($payment->created_at));
             $payment->time = date("G:i", strtotime($payment->created_at));
             $payment->ticket_price = number_format($payment->purchase->ticket_price);
             $payment->payment_amount = number_format($payment->purchase->payment_amount);
@@ -144,7 +144,7 @@ class AdminController extends Controller
             ->get();
         foreach ($payments as $payment) {
             $payment->key = md5('invoice-'.$payment->id.'-brilla-futura');
-            $payment->date = date("Y/m/d, H:i", strtotime($payment->created_at));
+            $payment->date = date("Y-m-d, H:i", strtotime($payment->created_at));
             $payment->tool_cost = number_format($payment->rental->tool->price);
             $payment->rental = $this->_setDate($payment->rental);
             $payment->payment_amount = number_format($payment->rental->payment_amount);
@@ -198,12 +198,12 @@ class AdminController extends Controller
     {
         if ($data->end_date) {
             if ($data->start_date === $data->end_date) {
-                $data->date = date("Y/m/j (M)", strtotime($data->start_date));
+                $data->date = date("Y m j (M)", strtotime($data->start_date));
             } else {
-                $data->date = date("Y/m/j", strtotime($data->start_date)) . "-" . date("j (M)", strtotime($data->end_date));
+                $data->date = date("Y m j", strtotime($data->start_date)) . "-" . date("j (M)", strtotime($data->end_date));
             }
         } else {
-            $data->date = date("Y/m/j (M)", strtotime($data->start_date));
+            $data->date = date("Y m j (M)", strtotime($data->start_date));
         }
         return $data;
     }

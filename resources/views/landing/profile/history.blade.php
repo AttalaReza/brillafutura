@@ -86,7 +86,7 @@ Start Page Title Area
                             <div class="post-thumb-area">
                                 <figure class="post-thumb">
                                     <a href="{{ route('landing.rental.show', $payment->rental->tool->slug) }}">
-                                        <img src="{{ asset('/storage/images/tools/'.$payment->rental->tool->file_image) }}" alt="{{ $payment->rental->tool->file_image }}" />
+                                        <img src="{{ asset('/uploads/'.$payment->rental->tool->file_image) }}" alt="{{ $payment->rental->tool->file_image }}" />
                                     </a>
                                 </figure>
                                 <!-- /.post-thumb -->

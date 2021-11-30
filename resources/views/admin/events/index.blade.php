@@ -61,7 +61,7 @@
                                 <th>{{ $event->id }}</th>
                                 <td>
                                     {{ $event->name }}<br />
-                                    <img class="mt-2" src="{{ asset('/storage/images/events/'.$event->file_image) }}" alt="{{ $event->file_image }}" width="200" />
+                                    <img class="mt-2" src="{{ asset('/uploads/'.$event->file_image) }}" alt="{{ $event->file_image }}" width="200" />
                                 </td>
                                 <td>
                                     @foreach($event->description as $desc)
